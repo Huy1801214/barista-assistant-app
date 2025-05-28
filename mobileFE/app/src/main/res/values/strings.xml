@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Barista Assistant App</string>
+    <string name="pos_app_logo_text">PosApp</string>
+    <string name="tagline">Bán hàng đơn giản hơn</string>
+    <string name="login_manager_account">Đăng nhập tài khoản quản lý</string>
+    <string name="username_hint">Tài khoản</string>
+    <string name="password_hint">Mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu ?</string>
+    <string name="login_button">Đăng nhập</string>
+    <string name="for_sales_staff">Dành cho nhân viên bán hàng</string>
+    <string name="login_device_code">Đăng nhập mã thiết bị</string>
+    <string name="no_account">Bạn không có tài khoản?</string>
+    <string name="register_now">Đăng ký ngay</string>
+
+    <string name="input_username_password_required">Vui lòng nhập tài khoản và mật khẩu</string>
+    <string name="login_successful_toast">Đăng nhập thành công:</string>
+    <string name="forgot_password_toast">Chức năng quên mật khẩu!</string>
+    <string name="device_login_toast">Chức năng đăng nhập mã thiết bị!</string>
+    <string name="register_now_toast">Chuyển đến trang đăng ký!</string>
+
+    <string name="back">Back</string>
+    <string name="action_1">Action1</string>
+    <string name="action_2">Action2</string>
+    <string name="action_3">Action3</string>
+    <string name="gift">Gift</string>
+    <string name="search">Tìm</string>
+    <string name="quick_add">Thêm nhanh</string>
+    <string name="at_store">Tại cửa hàng</string>
+    <string name="category_item_placeholder">Danh mục</string>
+    <string name="product_image_desc">Ảnh sản phẩm</string>
+    <string name="product_name_placeholder">Tên sản phẩm</string>
+    <string name="product_price_placeholder">Giá</string>
+    <string name="total_amount">Tổng cộng</string>
+    <string name="initial_total_value">0</string>
+    <string name="take_away">Mang đi</string>
+    <string name="waiting_card">Thẻ chờ</string>
+    <string name="payment">T.Toán</string>
+
+    <string name="cart">Giỏ hàng</string> <!-- Sửa lại từ "Cart" nếu cần -->
+
+    <!-- String cho màn hình Nhân Viên -->
+    <string name="employee_name_placeholder">Nhân Viên 1</string>
+    <string name="at_counter">Tại quầy</string>
+    <string name="reports">Báo cáo</string>
+    <string name="synchronize">Đồng bộ</string>
+    <string name="add_more">Thêm</string>
+    <string name="need_help_title">Bạn cần hỗ trợ?</string>
+    <string name="need_help_subtitle">Phản hồi chất lượng dịch vụ hoặc báo cáo sự cố</string>
+    <string name="contact_us">Liên hệ</string>
+    <string name="home_tab">Trang chủ</string>
+    <string name="settings_tab">Thiết lập</string>
+</resources>
