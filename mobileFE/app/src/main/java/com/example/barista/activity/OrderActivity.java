@@ -11,6 +11,6 @@ public class OrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_comfirm_order);
+        setContentView(R.layout.comfirm_order_activity);
     }
 }

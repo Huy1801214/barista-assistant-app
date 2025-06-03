@@ -5,13 +5,50 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/itemTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp">
+        android:orientation="horizontal"
+        >
 
-    </TextView>
+        <ImageView
+            android:id="@+id/thumbnailImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop">
+
+        </ImageView>
+        <Space
+            android:layout_width="16dp"
+            android:layout_height="0dp">
+        </Space>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="24sp">
+
+            </TextView>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="3dp">
+            </Space>
+            <TextView
+                android:id="@+id/productPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp">
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

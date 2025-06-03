@@ -1,23 +1,20 @@
 package com.example.barista;
 
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 
 public class ComfirmOrder extends AppCompatActivity {
 
     private ImageButton orderListButton, orderInfoButton, orderPaymentButton;
     private View orderListUnderLine, orderInfoUnderLine, orderPaymentUnderLine;
+    private static Fragment orderListFragment = new OrderList();
     private int currentTab = 0;
 
     public ComfirmOrder() {
@@ -29,7 +26,7 @@ public class ComfirmOrder extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_comfirm_order);
+        setContentView(R.layout.comfirm_order_activity);
         orderListButton      = findViewById(R.id.orderListButton);
         orderInfoButton      = findViewById(R.id.orderInfoButton);
         orderPaymentButton   = findViewById(R.id.orderPaymentButton);
@@ -76,7 +73,7 @@ public class ComfirmOrder extends AppCompatActivity {
         switch (tabIndex) {
             case 0:
                 orderListUnderLine.setVisibility(View.VISIBLE);
-                // TODO: load hoặc hiển thị nội dung của "Order List" vào frame_order_view
+                switchFragment(orderListFragment);
                 break;
             case 1:
                 orderInfoUnderLine.setVisibility(View.VISIBLE);
@@ -89,5 +86,10 @@ public class ComfirmOrder extends AppCompatActivity {
         }
 
     }
+    private void switchFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.frame_order_view, fragment).commit();
+    }
 
 }
+
