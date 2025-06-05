@@ -1,6 +1,8 @@
 package com.example.barista;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,8 +10,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.barista.data.Cart;
+import com.example.barista.data.OrderItem;
+import com.example.barista.data.ProductItem;
+import com.example.barista.data.ProductItems;
+import com.example.barista.module.Sharedable;
 
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+    private Button orderButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +30,27 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+//        testOrderMenu();
+        orderButton = findViewById(R.id.orderButton);
+        orderButton.setOnClickListener(v -> testOrderMenu());
+    }
+
+    private void testOrderMenu() {
+        Sharedable.put(Cart.ID, new Cart());
+        Sharedable.put(ProductItems.ID, new ProductItems(List.of(
+                new ProductItem(
+                        0,
+                        "Cafe",
+                        10000,
+                        ""
+                )
+        )));
+
+        ProductItems p = (ProductItems) Sharedable.get(ProductItems.ID);
+
+        ((Cart) Sharedable.get(Cart.ID)).addNewItem(p.getItemById(0));
+        Intent intent = new Intent(this, ComfirmOrder.class);
+        startActivity(intent);
     }
 }

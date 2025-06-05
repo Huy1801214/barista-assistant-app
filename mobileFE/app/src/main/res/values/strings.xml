@@ -49,4 +49,19 @@
     <string name="contact_us">Liên hệ</string>
     <string name="home_tab">Trang chủ</string>
     <string name="settings_tab">Thiết lập</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product_order_list">Danh sách sản phẩm</string>
+    <string name="tam_tinh">Tạm tính</string>
+    <string name="total_price">Tổng tiền</string>
+    <string name="note">Ghi chú</string>
+    <string name="payment_method">Phương thức thanh toán</string>
+    <string name="tien_mat">Tiền mặt</string>
+    <string name="cash">Thẻ</string>
+    <string name="nhap_so_tien_nhan">Nhập số tiền nhận</string>
+    <string name="return_cash">Tiền trả lại khách</string>
+    <string name="comfirm_order">Thanh toán</string>
+    <string name="discount">Giảm giá</string>
+    <string name="discount_hint">Nhập mã giảm giá</string>
+    <string name="note_hint">Nhập ghi chú</string>
 </resources>
