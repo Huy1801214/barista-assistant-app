@@ -12,10 +12,10 @@ import android.widget.ImageButton;
 
 public class ComfirmOrder extends AppCompatActivity {
 
-    private ImageButton orderListButton, orderInfoButton, orderPaymentButton;
-    private View orderListUnderLine, orderInfoUnderLine, orderPaymentUnderLine;
-    private static Fragment orderListFragment = new OrderList();
-    private int currentTab = 0;
+    private ImageButton orderListButton, orderPaymentButton;
+    private View orderListUnderLine, orderPaymentUnderLine;
+    private static final Fragment ORDER_LIST_FRAGMENT = new OrderList();
+    private static final Fragment ORDER_PAYMENT_FRAGMENT = new OrderPayment();
 
     public ComfirmOrder() {
         // Required empty public constructor
@@ -28,11 +28,9 @@ public class ComfirmOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comfirm_order_activity);
         orderListButton      = findViewById(R.id.orderListButton);
-        orderInfoButton      = findViewById(R.id.orderInfoButton);
         orderPaymentButton   = findViewById(R.id.orderPaymentButton);
 
         orderListUnderLine    = findViewById(R.id.orderListUnderLine);
-        orderInfoUnderLine    = findViewById(R.id.orderInfoUnderLine);
         orderPaymentUnderLine = findViewById(R.id.orderPaymentUnderLine);
 
         selectTab(0);
@@ -45,12 +43,6 @@ public class ComfirmOrder extends AppCompatActivity {
             }
         });
 
-        orderInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectTab(1);
-            }
-        });
 
         orderPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,26 +54,19 @@ public class ComfirmOrder extends AppCompatActivity {
     }
 
     private void selectTab(int tabIndex) {
-        currentTab = tabIndex;
-
         // 1. Ẩn hết các underline trước
         orderListUnderLine.setVisibility(View.INVISIBLE);
-        orderInfoUnderLine.setVisibility(View.INVISIBLE);
         orderPaymentUnderLine.setVisibility(View.INVISIBLE);
 
         // 2. Hiển thị underline tương ứng
         switch (tabIndex) {
             case 0:
                 orderListUnderLine.setVisibility(View.VISIBLE);
-                switchFragment(orderListFragment);
-                break;
-            case 1:
-                orderInfoUnderLine.setVisibility(View.VISIBLE);
-                // TODO: load hoặc hiển thị nội dung của "Order Info" vào frame_order_view
+                switchFragment(ORDER_LIST_FRAGMENT);
                 break;
             case 2:
                 orderPaymentUnderLine.setVisibility(View.VISIBLE);
-                // TODO: load hoặc hiển thị nội dung của "Order Payment" vào frame_order_view
+                switchFragment(ORDER_PAYMENT_FRAGMENT);
                 break;
         }
 

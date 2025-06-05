@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:background="@color/orange_brand"
             android:orientation="vertical"
+            android:paddingTop="10dp"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -25,15 +26,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <ImageButton
                         android:id="@+id/orderListButton"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/check_box_24px"
-                        android:background="@null"/>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/check_box_24px" />
                     <View
                         android:id="@+id/orderListUnderLine"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="4dp"
                         android:background="#FFFFFF"
                         android:visibility="visible">
@@ -50,40 +53,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <ImageButton
-                        android:id="@+id/orderInfoButton"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/info_24px"
-                        android:background="@null"/>
-                    <View
-                        android:id="@+id/orderInfoUnderLine"
-                        android:layout_width="50dp"
-                        android:layout_height="4dp"
-                        android:background="#FFFFFF"
-                        android:visibility="invisible">
 
-                    </View>
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="16dp"
-                    android:layout_height="0dp">
-
-                </Space>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
                     <ImageButton
                         android:id="@+id/orderPaymentButton"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/info_24px"
-                        android:background="@null"/>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/payments_24px" />
                     <View
                         android:id="@+id/orderPaymentUnderLine"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="4dp"
                         android:background="#FFFFFF"
                         android:visibility="invisible">

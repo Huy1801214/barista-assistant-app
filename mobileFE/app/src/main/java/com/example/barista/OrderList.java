@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.barista.adpater.OrderListAdapter;
+import com.example.barista.data.Cart;
 import com.example.barista.data.OrderItem;
 import com.example.barista.module.Sharedable;
 
@@ -40,13 +41,13 @@ public class OrderList extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        List<OrderItem> items = (List<OrderItem>) Sharedable.get("ordersItems");
+        Cart cart = (Cart) Sharedable.get(Cart.ID);
         // Set up RecyclerView and adapter
 
         RecyclerView recyclerView = view.findViewById(R.id.orderRecyclerView);
         Context ctx = requireContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
-        var adapter = new OrderListAdapter(this, items);
+        var adapter = new OrderListAdapter(this, cart.getOrderItems());
         recyclerView.setAdapter(adapter);
     }
 

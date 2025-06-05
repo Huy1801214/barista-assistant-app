@@ -10,7 +10,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.barista.data.Cart;
 import com.example.barista.data.OrderItem;
+import com.example.barista.data.ProductItem;
+import com.example.barista.data.ProductItems;
 import com.example.barista.module.Sharedable;
 
 import java.util.List;
@@ -34,9 +37,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void testOrderMenu() {
-        Sharedable.put("ordersItems", List.of(
-                new OrderItem("Cà phê sửa đá", 10000, 1, "http://10.0.2.2:8080/storage/MeoBeo.jpg")
-        ));
+        Sharedable.put(Cart.ID, new Cart());
+        Sharedable.put(ProductItems.ID, new ProductItems(List.of(
+                new ProductItem(
+                        0,
+                        "Cafe",
+                        10000,
+                        ""
+                )
+        )));
+
+        ProductItems p = (ProductItems) Sharedable.get(ProductItems.ID);
+
+        ((Cart) Sharedable.get(Cart.ID)).addNewItem(p.getItemById(0));
         Intent intent = new Intent(this, ComfirmOrder.class);
         startActivity(intent);
     }
