@@ -163,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@string/contact_us"
-                        app:icon="@drawable/ic_chat_bubble"
+                        app:icon="@drawable/ic_person_placeholder"
                         android:backgroundTint="@color/blue_accent"
                         android:textColor="@color/white"
                         app:iconTint="@color/white"
