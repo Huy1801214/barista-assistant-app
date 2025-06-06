@@ -1,6 +1,8 @@
 package com.example.barista.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,9 +44,14 @@ public class LoginActivity extends AppCompatActivity {
                     // Xử lý logic đăng nhập ở đây (ví dụ: gọi API, kiểm tra CSDL)
                     // Tạm thời chỉ hiển thị Toast
                     Toast.makeText(LoginActivity.this, getString(R.string.login_successful_toast) + " " + username, Toast.LENGTH_LONG).show();
-                    // Ví dụ: Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    // startActivity(intent);
-                    // finish();
+                    Intent intent = new Intent(LoginActivity.this, EmployeeDashboardActivity.class);
+
+                    // 2. Bắt đầu Activity mới
+                    startActivity(intent);
+
+                    // 3. (Tùy chọn nhưng khuyến nghị) Kết thúc LoginActivity để người dùng
+                    // không thể nhấn nút Back để quay lại màn hình đăng nhập
+                    finish();
                 }
             }
         });
