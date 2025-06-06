@@ -1,6 +1,15 @@
 package com.example.barista.activity;
 
 import android.app.Activity;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MenuActivity extends Activity {
+import com.example.barista.R;
+
+public class MenuActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.menu);
+    }
 }
