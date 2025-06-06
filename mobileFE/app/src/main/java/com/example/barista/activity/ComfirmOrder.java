@@ -1,4 +1,4 @@
-package com.example.barista;
+package com.example.barista.activity;
 
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.example.barista.OrderList;
+import com.example.barista.OrderPayment;
+import com.example.barista.R;
 
 
 public class ComfirmOrder extends AppCompatActivity {
