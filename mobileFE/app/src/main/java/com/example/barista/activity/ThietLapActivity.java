@@ -1,25 +1,25 @@
 package com.example.barista.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.barista.R;
 
-public class MenuActivity extends AppCompatActivity {
+public class ThietLapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu);
+        setContentView(R.layout.activity_thiet_lap);
 
-        LinearLayout layoutVoucher = findViewById(R.id.layoutVoucher);
-        layoutVoucher.setOnClickListener(new View.OnClickListener() {
+        LinearLayout llQuanLyNhanVien = findViewById(R.id.llQuanLyNhanVien);
+        llQuanLyNhanVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, VoucherManagementActivity.class);
+                Intent intent = new Intent(ThietLapActivity.this, EmployeeManagementActivity.class);
                 startActivity(intent);
             }
         });

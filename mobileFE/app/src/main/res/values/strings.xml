@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Barista Assistant App</string>
-    <string name="pos_app_logo_text">PosApp</string>
+    <string name="pos_app_logo_text">Barista Assistant App</string>
     <string name="tagline">Bán hàng đơn giản hơn</string>
     <string name="login_manager_account">Đăng nhập tài khoản quản lý</string>
     <string name="username_hint">Tài khoản</string>
@@ -64,4 +64,9 @@
     <string name="discount">Giảm giá</string>
     <string name="discount_hint">Nhập mã giảm giá</string>
     <string name="note_hint">Nhập ghi chú</string>
+
+    <string name="voucher_management">Quản lý Voucher</string>
+    <string name="add_voucher">Thêm voucher</string>
+    <string name="export">Xuất file</string>
+    <string name="delete_selected">Xóa đã chọn</string>
 </resources>
