@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/back"
             android:padding="8dp"
-            android:src="@drawable/ic_placeholder_24dp"
+            android:src="@drawable/ic_arrow_forward"
             app:tint="@color/white" />
 
         <Space
@@ -73,15 +73,32 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-        <ImageView
-            android:id="@+id/imageViewGift"
+        <LinearLayout
+            android:id="@+id/layoutVoucher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/gift"
-            android:src="@drawable/ic_placeholder_24dp"
-            app:tint="@color/orange_primary"
-            tools:ignore="ImageContrastCheck" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/imageViewGift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/gift"
+                android:src="@drawable/ic_gift"
+                app:tint="@color/orange_primary"
+                tools:ignore="ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/textViewVoucher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Voucher"
+                android:textColor="@color/orange_primary"
+                android:textSize="16sp"
+                android:layout_marginStart="4dp"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textViewSearch"
@@ -91,7 +108,7 @@
             android:drawablePadding="6dp"
             android:text="@string/search"
             android:textColor="@color/dark_gray_text"
-            app:drawableStartCompat="@drawable/ic_placeholder_24dp" />
+            app:drawableStartCompat="@drawable/ic_search" />
 
         <TextView
             android:id="@+id/textViewQuickAdd"
@@ -101,7 +118,7 @@
             android:drawablePadding="6dp"
             android:text="@string/quick_add"
             android:textColor="@color/dark_gray_text"
-            app:drawableStartCompat="@drawable/ic_placeholder_24dp" />
+            app:drawableStartCompat="@drawable/ic_add" />
 
         <Space
             android:layout_width="0dp"
@@ -115,8 +132,7 @@
             android:drawablePadding="6dp"
             android:text="@string/at_store"
             android:textColor="@color/dark_gray_text"
-            app:drawableEndCompat="@drawable/ic_placeholder_24dp"
-            app:drawableStartCompat="@drawable/ic_placeholder_24dp" />
+            app:drawableStartCompat="@drawable/ic_store" />
     </LinearLayout>
 
     <!-- === MAIN CONTENT: Categories and Products === -->

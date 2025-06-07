@@ -1,6 +1,8 @@
 package com.example.barista.activity;
 
 import android.app.Activity;
+
+import android.widget.LinearLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +29,15 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+
+        LinearLayout layoutVoucher = findViewById(R.id.layoutVoucher);
+        layoutVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, VoucherManagementActivity.class);
+                startActivity(intent);
+            }
+        });
         orderButton = findViewById(R.id.buttonPayment);
         orderButton.setOnClickListener(v -> openOrderMenu());
 

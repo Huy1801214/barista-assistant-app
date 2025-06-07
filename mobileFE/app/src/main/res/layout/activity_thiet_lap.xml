@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Thanh tiêu đề -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/orange_primary"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp">
+        <TextView
+            android:text="Thiết lập"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Thông tin nhân viên -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:text="NHÂN VIÊN 1"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="H349 - 8/2C Nguyễn Du, Khu Phố 1, P.Bửu Long..."
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Gói vĩnh viễn"
+            android:textColor="@color/orange_primary"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Các mục thiết lập -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray_background"/>
+    <TextView
+        android:text="THIẾT LẬP DANH MỤC"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:textColor="@color/dark_gray_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Danh mục sản phẩm -->
+        <LinearLayout
+            android:id="@+id/llDanhMucSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/list"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
+                android:text="Danh mục sản phẩm"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <!-- Thiết lập menu -->
+        <LinearLayout
+            android:id="@+id/llThietLapMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/restaurant"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
+                android:text="Thiết lập menu"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <!-- Quản lý nhân viên -->
+        <LinearLayout
+            android:id="@+id/llQuanLyNhanVien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/profile"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
+                android:text="Quản lý nhân viên"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <!-- Quản lý voucher -->
+        <LinearLayout
+            android:id="@+id/llQuanLyVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/discount_coupon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
+                android:text="Quản lý voucher"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <!-- Quản lý ca làm việc -->
+        <LinearLayout
+            android:id="@+id/llQuanLyCaLamViec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/shift"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
+                android:text="Quản lý ca làm việc"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
