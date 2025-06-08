@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.barista.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class EmployeeDashboardActivity extends AppCompatActivity {
     @Override
@@ -26,6 +27,17 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
                 Intent intent = new Intent(EmployeeDashboardActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.navigation_settings) {
+                Intent intent = new Intent(EmployeeDashboardActivity.this, ThietLapActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            // Handle other tabs if needed
+            return false;
         });
     }
 }

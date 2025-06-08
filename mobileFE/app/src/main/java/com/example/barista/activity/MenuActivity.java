@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +43,25 @@ public class MenuActivity extends AppCompatActivity {
         orderButton = findViewById(R.id.buttonPayment);
         orderButton.setOnClickListener(v -> openOrderMenu());
 
+        ImageView threePoint = findViewById(R.id.imageViewAction3);
+        threePoint.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.getMenuInflater().inflate(R.menu.menu_three_point, popup.getMenu());
+            popup.setOnMenuItemClickListener(item -> {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.menu_open_shift) {
+                    // Xử lý mở ca
+                    return true;
+                } else if (itemId == R.id.menu_close_shift) {
+                    // Xử lý đóng ca
+                    return true;
+                }
+
+                return false;
+            });
+            popup.show();
+        });
     }
 
     private void openOrderMenu() {
