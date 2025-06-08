@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_open_shift" android:title="Mở ca" />
+    <item android:id="@+id/menu_close_shift" android:title="Đóng ca" />
+    <item android:id="@+id/menu_shift_history" android:title="Lịch sử đóng mở ca" />
+    <item android:id="@+id/menu_shift_setting" android:title="Thiết lập ca" />
+    <item android:id="@+id/menu_send_bar" android:title="Gửi bếp bar" />
+    <item android:id="@+id/menu_discount" android:title="Giảm giá" />
+    <item android:id="@+id/menu_sale_setting" android:title="Thiết lập bán hàng" />
+    <item android:id="@+id/menu_bill_history" android:title="Lịch sử hóa đơn" />
+</menu>
