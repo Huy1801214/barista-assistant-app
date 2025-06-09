@@ -1,6 +1,5 @@
 package com.edu.server.api;
 
-import com.edu.server.collection.UserEntity;
 import com.edu.server.dto.LoginRequest;
 import com.edu.server.dto.RegisterRequest;
 import com.edu.server.service.AuthService;
@@ -54,8 +53,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
-        String jwt = authService.login(loginRequest);
-        return ResponseEntity.ok(new LoginResponse(jwt));
+    public ResponseEntity<com.edu.server.dto.LoginResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+        com.edu.server.dto.LoginResponse loginResponse = authService.login(loginRequest);
+        return ResponseEntity.ok(loginResponse);
     }
 }
