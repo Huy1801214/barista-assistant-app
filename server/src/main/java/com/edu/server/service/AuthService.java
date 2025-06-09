@@ -5,6 +5,7 @@ import com.edu.server.collection.UserEntity;
 import com.edu.server.dao.StoreRepository; // Giả sử bạn đã có StoreRepository
 import com.edu.server.dao.UserRepository;
 import com.edu.server.dto.LoginRequest;
+import com.edu.server.dto.LoginResponse;
 import com.edu.server.dto.RegisterRequest;
 import com.edu.server.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,8 +79,7 @@ public class AuthService {
     /**
      * Xử lý logic đăng nhập
      */
-    public String login(LoginRequest loginRequest) {
-        // Xác thực người dùng bằng email và password
+    public LoginResponse login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -87,11 +87,24 @@ public class AuthService {
                 )
         );
 
-        // Nếu không xảy ra exception tức là thông tin hợp lệ
-        // Set thông tin authentication vào Security Context
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Tạo và trả về chuỗi JWT
-        return tokenProvider.generateToken(authentication);
+        // Tạo JWT Token
+        String jwt = tokenProvider.generateToken(authentication);
+
+        // Lấy thông tin chi tiết của người dùng từ DB để trả về
+        UserEntity userEntity = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found after authentication"));
+
+        // Tạo đối tượng UserInfo
+        LoginResponse.UserInfo userInfo = new LoginResponse.UserInfo();
+        userInfo.setId(userEntity.getId());
+        userInfo.setFullName(userEntity.getFullName());
+        userInfo.setEmail(userEntity.getEmail());
+        userInfo.setRole(userEntity.getRole().name()); // Chuyển enum thành String
+        userInfo.setStoreId(userEntity.getStoreId());
+
+        // Trả về đối tượng LoginResponse hoàn chỉnh
+        return new LoginResponse(jwt, userInfo);
     }
 }

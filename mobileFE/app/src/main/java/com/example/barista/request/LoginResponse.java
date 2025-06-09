@@ -8,9 +8,32 @@ public class LoginResponse {
 
     @SerializedName("tokenType")
     private String tokenType;
+    @SerializedName("userInfo")
+    private UserInfo userInfo;
 
+    public static class UserInfo {
+        @SerializedName("fullName")
+        private String fullName;
+
+        @SerializedName("role")
+        private String role;
+
+        // Getters
+        public String getFullName() {
+            return fullName;
+        }
+
+        public String getRole() {
+            return role;
+        }
+    }
+
+    // Getters
     public String getAccessToken() {
         return accessToken;
     }
-    // ... các Getters khác nếu cần
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
 }

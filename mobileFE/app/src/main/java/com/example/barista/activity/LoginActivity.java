@@ -121,7 +121,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     // Đăng nhập thành công, server trả về mã 2xx
                     String token = response.body().getAccessToken();
-                    sessionManager.saveAuthToken(token); // Lưu token vào SharedPreferences
+                    LoginResponse.UserInfo userInfo = response.body().getUserInfo();
+                    sessionManager.saveLoginSession(token, userInfo);
 
                     Toast.makeText(LoginActivity.this, getString(R.string.login_successful_toast), Toast.LENGTH_SHORT).show();
                     navigateToDashboard();
