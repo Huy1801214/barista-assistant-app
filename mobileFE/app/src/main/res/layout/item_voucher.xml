@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Dải màu trạng thái bên trái -->
+        <View
+            android:id="@+id/status_indicator"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            android:background="@color/status_active"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Phần thông tin chính -->
+        <LinearLayout
+            android:id="@+id/info_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewMore"
+            app:layout_constraintStart_toEndOf="@id/status_indicator"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewVoucherName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Giảm 20% tổng hóa đơn" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/voucher_code_background"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/voucher_code_label"
+                    android:textColor="@color/orange_brand"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewVoucherCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/orange_brand"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="KM20" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/textViewValidUntil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_light_gray"
+                android:textSize="14sp"
+                app:drawableTint="@color/text_light_gray"
+                tools:text="Còn hiệu lực đến 31/12/2025" />
+        </LinearLayout>
+
+        <!-- Nút tùy chọn (3 chấm) -->
+        <ImageView
+            android:id="@+id/imageViewMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="16dp"
+            android:src="@drawable/ic_more_vert"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_light_gray" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

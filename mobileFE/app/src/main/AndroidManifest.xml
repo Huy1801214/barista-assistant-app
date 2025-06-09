@@ -28,7 +28,7 @@
         <activity android:name=".activity.EmployeeDashboardActivity" />
         <activity android:name=".activity.MenuActivity"/>
         <activity android:name=".activity.VoucherManagementActivity" />
-        <activity android:name=".activity.EmployeeManagementActivity" />
+        <activity android:name=".activity.StaffManagementActivity" />
         <activity android:name=".activity.ThietLapActivity" />
         <activity android:name=".activity.ComfirmOrder"/>
     </application>

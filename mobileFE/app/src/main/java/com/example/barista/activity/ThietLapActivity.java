@@ -19,7 +19,7 @@ public class ThietLapActivity extends AppCompatActivity {
         llQuanLyNhanVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ThietLapActivity.this, EmployeeManagementActivity.class);
+                Intent intent = new Intent(ThietLapActivity.this, StaffManagementActivity.class);
                 startActivity(intent);
             }
         });
