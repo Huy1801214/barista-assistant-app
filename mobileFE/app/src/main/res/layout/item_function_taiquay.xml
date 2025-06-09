@@ -15,9 +15,9 @@
         android:padding="16dp">
 
         <ImageView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:src="@drawable/ic_store"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/taiquay"
             android:contentDescription="Tại quầy"
             app:tint="@color/icon_green" />
 

@@ -21,4 +21,7 @@
     <color name="icon_orange_report">#FF9800</color>
     <color name="icon_pink_sync">#E91E63</color>
     <color name="icon_gray_add">#9E9E9E</color>
+    <color name="status_active">#4CAF50</color> <!-- Xanh lá -->
+    <color name="status_expired">#F44336</color> <!-- Đỏ -->
+    <color name="status_paused">#FF9800</color> <!-- Cam đậm -->
 </resources>

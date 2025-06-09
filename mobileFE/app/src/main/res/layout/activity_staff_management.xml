@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray_background"
-    tools:context=".activity.VoucherManagementActivity">
+    tools:context=".activity.StaffManagementActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,20 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_back_arrow"
-            app:title="@string/voucher_management_title"
+            app:title="@string/staff_management_title"
             app:titleTextColor="@color/text_dark_gray" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewVouchers"
+        android:id="@+id/recyclerViewStaff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item_voucher" />
+        tools:listitem="@layout/item_employee" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddVoucher"
+        android:id="@+id/fabAddEmployee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -38,6 +38,6 @@
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/orange_brand"
         app:tint="@color/white"
-        android:contentDescription="@string/add_new_voucher"/>
+        android:contentDescription="@string/add_new_employee"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
