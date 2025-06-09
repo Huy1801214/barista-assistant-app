@@ -69,4 +69,13 @@
     <string name="add_voucher">Thêm voucher</string>
     <string name="export">Xuất file</string>
     <string name="delete_selected">Xóa đã chọn</string>
+
+    <string name="register_account_title">Đăng Ký Tài Khoản</string>
+    <string name="full_name_hint">Họ và Tên</string>
+    <string name="email_hint">Email (dùng để đăng nhập)</string>
+    <string name="phone_number_hint">Số điện thoại (tùy chọn)</string>
+    <string name="store_name_hint">Tên cửa hàng của bạn</string>
+    <string name="register_button">Đăng Ký</string>
+    <string name="already_have_account">Bạn đã có tài khoản?</string>
+    <string name="login_now">Đăng nhập ngay</string>
 </resources>
