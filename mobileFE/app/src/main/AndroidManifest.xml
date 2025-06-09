@@ -31,6 +31,7 @@
         <activity android:name=".activity.StaffManagementActivity" />
         <activity android:name=".activity.ThietLapActivity" />
         <activity android:name=".activity.ComfirmOrder"/>
+        <activity android:name=".activity.RegisterActivity"/>
     </application>
 
 </manifest>

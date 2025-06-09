@@ -94,11 +94,10 @@
         <!-- Nút tùy chọn (3 chấm) -->
         <ImageView
             android:id="@+id/imageViewMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="16dp"
-            android:src="@drawable/ic_more_vert"
+            android:src="@drawable/three_point"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/text_light_gray" />
