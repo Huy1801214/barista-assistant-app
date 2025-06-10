@@ -32,6 +32,8 @@
         <activity android:name=".activity.ThietLapActivity" />
         <activity android:name=".activity.ComfirmOrder"/>
         <activity android:name=".activity.RegisterActivity"/>
+        <activity android:name=".activity.AddVoucherActivity"/>
+        <activity android:name=".activity.ShiftManagementActivity"/>
     </application>
 
 </manifest>

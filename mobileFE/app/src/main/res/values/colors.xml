@@ -24,4 +24,7 @@
     <color name="status_active">#4CAF50</color> <!-- Xanh lá -->
     <color name="status_expired">#F44336</color> <!-- Đỏ -->
     <color name="status_paused">#FF9800</color> <!-- Cam đậm -->
+
+    <color name="status_scheduled">#2196F3</color> <!-- Xanh dương -->
+    <color name="status_inprogress">#FF9800</color>
 </resources>
