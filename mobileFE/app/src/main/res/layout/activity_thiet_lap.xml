@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -10,7 +11,8 @@
         android:layout_height="56dp"
         android:background="@color/orange_primary"
         android:gravity="center_vertical"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
         <TextView
             android:text="Thiết lập"
             android:textColor="@color/white"
@@ -45,7 +47,6 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <!-- Các mục thiết lập -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -57,18 +58,22 @@
         android:textColor="@color/dark_gray_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <!-- Danh mục sản phẩm -->
+
         <LinearLayout
             android:id="@+id/llDanhMucSanPham"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
             <ImageView
                 android:src="@drawable/list"
                 android:layout_width="24dp"
@@ -80,14 +85,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <!-- Thiết lập menu -->
+
         <LinearLayout
             android:id="@+id/llThietLapMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
             <ImageView
                 android:src="@drawable/restaurant"
                 android:layout_width="24dp"
@@ -99,14 +107,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <!-- Quản lý nhân viên -->
+
         <LinearLayout
             android:id="@+id/llQuanLyNhanVien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
             <ImageView
                 android:src="@drawable/profile"
                 android:layout_width="24dp"
@@ -118,14 +129,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <!-- Quản lý voucher -->
+
         <LinearLayout
             android:id="@+id/llQuanLyVoucher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
             <ImageView
                 android:src="@drawable/discount_coupon"
                 android:layout_width="24dp"
@@ -137,14 +151,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <!-- Quản lý ca làm việc -->
+
         <LinearLayout
             android:id="@+id/llQuanLyCaLamViec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
             <ImageView
                 android:src="@drawable/shift"
                 android:layout_width="24dp"
@@ -156,14 +173,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <!-- Thiết lap tài khoản -->
+
         <LinearLayout
             android:id="@+id/llThietLapTaiKhoan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
             <ImageView
                 android:src="@drawable/user"
                 android:layout_width="24dp"

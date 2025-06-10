@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.barista.R;
 import com.example.barista.data.Voucher;
 
-
 import java.util.List;
 
 public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherViewHolder> {
@@ -60,26 +59,45 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
             imageViewMore = itemView.findViewById(R.id.imageViewMore);
         }
 
+        /**
+         * Phương thức bind dữ liệu từ model Voucher vào các View
+         *
+         * @param voucher Đối tượng Voucher chứa dữ liệu từ API
+         */
         void bind(final Voucher voucher) {
             textViewVoucherName.setText(voucher.getName());
             textViewVoucherCode.setText(voucher.getCode());
-            textViewValidUntil.setText(voucher.getValidUntil());
 
-            // Thay đổi màu sắc dựa trên trạng thái
-            switch (voucher.getStatus()) {
+            // *** THAY ĐỔI QUAN TRỌNG 1 ***
+            // Sử dụng phương thức tiện ích đã được định dạng sẵn trong model
+            textViewValidUntil.setText(voucher.getFormattedValidUntil());
+
+            // *** THAY ĐỔI QUAN TRỌNG 2 ***
+            // Sử dụng phương thức getDisplayStatus() để lấy trạng thái cuối cùng
+            // (đã bao gồm logic kiểm tra ngày hết hạn)
+            switch (voucher.getDisplayStatus()) {
                 case ACTIVE:
                     statusIndicator.setBackgroundColor(ContextCompat.getColor(context, R.color.status_active));
                     break;
                 case EXPIRED:
                     statusIndicator.setBackgroundColor(ContextCompat.getColor(context, R.color.status_expired));
+                    textViewValidUntil.setText("Đã hết hạn"); // Có thể ghi đè text nếu muốn
                     break;
                 case PAUSED:
                     statusIndicator.setBackgroundColor(ContextCompat.getColor(context, R.color.status_paused));
                     break;
             }
 
-            imageViewMore.setOnClickListener(v -> Toast.makeText(context, "Tùy chọn cho " + voucher.getName(), Toast.LENGTH_SHORT).show());
-            itemView.setOnClickListener(v -> Toast.makeText(context, "Xem chi tiết " + voucher.getName(), Toast.LENGTH_SHORT).show());
+            // Các sự kiện click giữ nguyên
+            imageViewMore.setOnClickListener(v -> {
+                // TODO: Hiển thị PopupMenu với các tùy chọn Sửa/Xóa/Ngưng kích hoạt
+                Toast.makeText(context, "Tùy chọn cho " + voucher.getName(), Toast.LENGTH_SHORT).show();
+            });
+
+            itemView.setOnClickListener(v -> {
+                // TODO: Chuyển đến màn hình chi tiết voucher hoặc màn hình sửa
+                Toast.makeText(context, "Xem chi tiết " + voucher.getName(), Toast.LENGTH_SHORT).show();
+            });
         }
     }
 }

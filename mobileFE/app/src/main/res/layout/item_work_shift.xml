@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/status_indicator"
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            tools:background="@color/status_scheduled" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textViewEmployeeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Nhân viên: Nguyễn Văn A" />
+
+            <TextView
+                android:id="@+id/textViewScheduledTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableStart="@drawable/ic_time"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_dark_gray"
+                tools:text="Giờ dự kiến: 08:00 - 16:00" />
+
+            <TextView
+                android:id="@+id/textViewActualTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/ic_check_circle"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_light_gray"
+                tools:text="Thực tế: Vào: 07:55 - Ra: 16:05" />
+
+        </LinearLayout>
+
+        <!-- Các nút hành động -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingEnd="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonClockIn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vào ca"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonClockOut"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ra ca"
+                android:textColor="@color/status_expired"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textViewStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="Đã hoàn thành"
+                tools:textColor="@color/status_active"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
