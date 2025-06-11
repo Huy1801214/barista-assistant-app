@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,11 +22,13 @@ public class WorkShiftAdapter extends RecyclerView.Adapter<WorkShiftAdapter.Shif
     private final List<WorkShift> shiftList;
     private final Context context;
     private final OnShiftActionListener listener;
+    private final String userRole; // Lưu vai trò người dùng để hiển thị UI phù hợp
 
-    public WorkShiftAdapter(Context context, List<WorkShift> shiftList, OnShiftActionListener listener) {
+    public WorkShiftAdapter(Context context, List<WorkShift> shiftList, OnShiftActionListener listener, String userRole) {
         this.context = context;
         this.shiftList = shiftList;
         this.listener = listener;
+        this.userRole = userRole;
     }
 
     @NonNull
@@ -48,8 +51,9 @@ public class WorkShiftAdapter extends RecyclerView.Adapter<WorkShiftAdapter.Shif
 
     class ShiftViewHolder extends RecyclerView.ViewHolder {
         View statusIndicator;
-        TextView textViewEmployeeName, textViewScheduledTime, textViewActualTime, textViewStatus;
+        TextView textViewEmployeeName, textViewScheduledTime, textViewActualTime, textViewStatus, textViewShiftName;
         MaterialButton buttonClockIn, buttonClockOut;
+        ImageView buttonMoreOptions;
 
         public ShiftViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,21 +64,31 @@ public class WorkShiftAdapter extends RecyclerView.Adapter<WorkShiftAdapter.Shif
             textViewStatus = itemView.findViewById(R.id.textViewStatus);
             buttonClockIn = itemView.findViewById(R.id.buttonClockIn);
             buttonClockOut = itemView.findViewById(R.id.buttonClockOut);
+            textViewShiftName = itemView.findViewById(R.id.textViewShiftName);
+            buttonMoreOptions = itemView.findViewById(R.id.buttonMoreOptions);
         }
 
         void bind(final WorkShift shift, final int position) {
-            // Hiển thị thông tin cơ bản
-            // TODO: Thay thế ID bằng tên nhân viên nếu API trả về
-            textViewEmployeeName.setText("Nhân viên: " + shift.getAssignedEmployeeName());
+            if (shift.getAssignedEmployeeName() != null) {
+                textViewEmployeeName.setText(shift.getAssignedEmployeeName());
+            } else {
+                textViewEmployeeName.setText("Không rõ nhân viên");
+            }
             textViewScheduledTime.setText("Dự kiến: " + shift.getFormattedScheduledTime());
             textViewActualTime.setText("Thực tế: " + shift.getFormattedActualTime());
 
-            // Reset trạng thái của các view có điều kiện trước khi set
+            if (shift.getShiftName() != null && !shift.getShiftName().isEmpty()) {
+                textViewShiftName.setText(shift.getShiftName());
+                textViewShiftName.setVisibility(View.VISIBLE);
+            } else {
+                textViewShiftName.setVisibility(View.GONE);
+            }
+
             buttonClockIn.setVisibility(View.GONE);
             buttonClockOut.setVisibility(View.GONE);
             textViewStatus.setVisibility(View.GONE);
+            buttonMoreOptions.setVisibility(View.GONE);
 
-            // Cập nhật UI dựa trên trạng thái của ca làm việc
             switch (shift.getStatus()) {
                 case "SCHEDULED":
                     statusIndicator.setBackgroundColor(ContextCompat.getColor(context, R.color.status_scheduled));
@@ -101,9 +115,13 @@ public class WorkShiftAdapter extends RecyclerView.Adapter<WorkShiftAdapter.Shif
                     break;
             }
 
-            // Gán sự kiện click cho các nút, gọi đến listener trong Activity
+            if ("OWNER".equals(userRole) || "MANAGER".equals(userRole)) {
+                buttonMoreOptions.setVisibility(View.VISIBLE);
+            }
+
             buttonClockIn.setOnClickListener(v -> listener.onClockIn(shift.getId(), position));
             buttonClockOut.setOnClickListener(v -> listener.onClockOut(shift.getId(), position));
+            buttonMoreOptions.setOnClickListener(v -> listener.onMoreOptionsClicked(shift, v));
         }
     }
 }

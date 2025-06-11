@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Item cho chức năng Sửa ca -->
+    <item
+        android:id="@+id/action_edit_shift"
+        android:title="Sửa ca làm việc" />
+
+    <!-- Item cho chức năng Hủy ca -->
+    <item
+        android:id="@+id/action_cancel_shift"
+        android:title="Hủy ca làm việc" />
+
+</menu>

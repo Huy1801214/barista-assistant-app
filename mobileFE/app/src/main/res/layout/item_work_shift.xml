@@ -10,23 +10,31 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
+        <!-- Dải màu trạng thái -->
         <View
             android:id="@+id/status_indicator"
             android:layout_width="6dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/status_scheduled" />
 
+        <!-- Cụm thông tin chính -->
         <LinearLayout
+            android:id="@+id/info_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/action_container"
+            app:layout_constraintStart_toEndOf="@id/status_indicator"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textViewEmployeeName"
@@ -49,6 +57,21 @@
                 tools:text="Giờ dự kiến: 08:00 - 16:00" />
 
             <TextView
+                android:id="@+id/textViewShiftName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/shift_name_background"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/orange_brand"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Ca 1 (Sáng)" />
+
+            <TextView
                 android:id="@+id/textViewActualTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,19 +84,24 @@
 
         </LinearLayout>
 
-        <!-- Các nút hành động -->
+        <!-- Cụm các nút hành động -->
         <LinearLayout
+            android:id="@+id/action_container"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:paddingEnd="16dp">
+            android:paddingEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonClockIn"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
                 android:text="Vào ca"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -83,6 +111,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="80dp"
                 android:text="Ra ca"
                 android:textColor="@color/status_expired"
                 android:visibility="gone"
@@ -92,11 +121,27 @@
                 android:id="@+id/textViewStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:textStyle="bold"
                 android:visibility="gone"
                 tools:text="Đã hoàn thành"
                 tools:textColor="@color/status_active"
                 tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/buttonMoreOptions"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/three_point"
+                android:visibility="gone"
+                app:tint="@color/text_light_gray"
+                tools:visibility="visible" />
+
         </LinearLayout>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
