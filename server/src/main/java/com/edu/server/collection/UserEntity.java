@@ -13,7 +13,7 @@ public class UserEntity {
     @Id
     private String id;
 
-    @Field("full_name")
+        @Field("full_name")
     private String fullName;
 
     // @Indexed(unique = true): Tạo một chỉ mục cho trường email và đảm bảo giá trị là duy nhất

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ public class WorkShiftService {
 
     /**
      * Lấy thông tin UserEntity của người dùng đang đăng nhập từ SecurityContext.
+     *
      * @return UserEntity của người dùng hiện tại.
      */
     private UserEntity getCurrentUser() {
@@ -37,6 +39,7 @@ public class WorkShiftService {
     /**
      * Phương thức private để chuyển đổi một WorkShiftEntity sang WorkShiftResponseDto.
      * Phương thức này sẽ "làm giàu" dữ liệu bằng cách lấy tên của nhân viên.
+     *
      * @param entity Đối tượng WorkShiftEntity từ database.
      * @return Một WorkShiftResponseDto đã có đầy đủ thông tin để hiển thị.
      */
@@ -50,6 +53,7 @@ public class WorkShiftService {
         dto.setScheduledEndTime(entity.getScheduledEndTime());
         dto.setActualClockInTime(entity.getActualClockInTime());
         dto.setActualClockOutTime(entity.getActualClockOutTime());
+        dto.setShiftName(determineShiftName(entity.getScheduledStartTime().toLocalTime()));
         dto.setStatus(entity.getStatus());
         dto.setNotes(entity.getNotes());
 
@@ -68,8 +72,30 @@ public class WorkShiftService {
         return dto;
     }
 
+    private String determineShiftName(LocalTime startTime) {
+        // Định nghĩa các khung giờ
+        final LocalTime MORNING_SHIFT_START = LocalTime.of(7, 0);
+        final LocalTime AFTERNOON_SHIFT_START = LocalTime.of(12, 0);
+        final LocalTime EVENING_SHIFT_START = LocalTime.of(17, 0);
+        final LocalTime NIGHT_SHIFT_END = LocalTime.of(22, 0);
+
+        // So sánh giờ bắt đầu
+        // `isBefore(exclusive)` và `!isAfter(inclusive)`
+        if (!startTime.isBefore(MORNING_SHIFT_START) && startTime.isBefore(AFTERNOON_SHIFT_START)) {
+            return "Ca 1";
+        } else if (!startTime.isBefore(AFTERNOON_SHIFT_START) && startTime.isBefore(EVENING_SHIFT_START)) {
+            return "Ca 2";
+        } else if (!startTime.isBefore(EVENING_SHIFT_START) && !startTime.isAfter(NIGHT_SHIFT_END)) {
+            return "Ca 3";
+        } else {
+            return "Ca 4";
+        }
+    }
+
+
     /**
      * Quản lý tạo một ca làm việc mới cho nhân viên.
+     *
      * @param request Dữ liệu đầu vào từ client.
      * @return WorkShiftResponseDto của ca làm việc vừa tạo.
      */
@@ -90,8 +116,9 @@ public class WorkShiftService {
 
     /**
      * Lấy tất cả các ca làm việc của cửa hàng trong một khoảng thời gian (dành cho quản lý).
+     *
      * @param start Thời gian bắt đầu tìm kiếm.
-     * @param end Thời gian kết thúc tìm kiếm.
+     * @param end   Thời gian kết thúc tìm kiếm.
      * @return Danh sách các WorkShiftResponseDto.
      */
     public List<WorkShiftResponseDto> getShiftsForStore(LocalDateTime start, LocalDateTime end) {
@@ -102,8 +129,9 @@ public class WorkShiftService {
 
     /**
      * Lấy tất cả các ca làm việc của chính nhân viên đang đăng nhập.
+     *
      * @param start Thời gian bắt đầu tìm kiếm.
-     * @param end Thời gian kết thúc tìm kiếm.
+     * @param end   Thời gian kết thúc tìm kiếm.
      * @return Danh sách các WorkShiftResponseDto.
      */
     public List<WorkShiftResponseDto> getMyShifts(LocalDateTime start, LocalDateTime end) {
@@ -114,6 +142,7 @@ public class WorkShiftService {
 
     /**
      * Nhân viên thực hiện chấm công vào ca.
+     *
      * @param shiftId ID của ca làm việc cần chấm công.
      * @return WorkShiftResponseDto của ca làm việc sau khi đã cập nhật.
      */
@@ -138,6 +167,7 @@ public class WorkShiftService {
 
     /**
      * Nhân viên thực hiện chấm công ra ca.
+     *
      * @param shiftId ID của ca làm việc cần chấm công.
      * @return WorkShiftResponseDto của ca làm việc sau khi đã cập nhật.
      */
@@ -162,6 +192,7 @@ public class WorkShiftService {
 
     /**
      * Quản lý thực hiện hủy một ca làm việc đã lên lịch.
+     *
      * @param shiftId ID của ca làm việc cần hủy.
      */
     public void cancelShift(String shiftId) {

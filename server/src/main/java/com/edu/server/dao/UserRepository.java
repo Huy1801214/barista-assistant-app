@@ -27,4 +27,5 @@ public interface UserRepository extends MongoRepository<UserEntity, String> {
      * @return Danh sách các User thuộc cửa hàng đó.
      */
     List<UserEntity> findByStoreId(String storeId);
+    List<UserEntity> findByStoreIdAndRoleAndIsActive(String storeId, UserEntity.Role role, boolean isActive);
 }
