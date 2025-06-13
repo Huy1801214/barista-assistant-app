@@ -35,6 +35,7 @@
         <activity android:name=".activity.AddVoucherActivity"/>
         <activity android:name=".activity.ShiftManagementActivity"/>
         <activity android:name=".activity.AddEditShiftActivity"/>
+        <activity android:name=".activity.ShiftHistoryActivity"/>
     </application>
 
 </manifest>

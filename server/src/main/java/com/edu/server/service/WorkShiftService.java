@@ -4,6 +4,7 @@ import com.edu.server.collection.UserEntity;
 import com.edu.server.collection.WorkShiftEntity;
 import com.edu.server.dao.UserRepository;
 import com.edu.server.dao.WorkShiftRepository;
+import com.edu.server.dto.WorkShiftHistoryDto;
 import com.edu.server.dto.WorkShiftRequest;
 import com.edu.server.dto.WorkShiftResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -206,5 +211,73 @@ public class WorkShiftService {
 
         shift.setStatus(WorkShiftEntity.ShiftStatus.CANCELED);
         workShiftRepository.save(shift);
+    }
+
+    public List<WorkShiftHistoryDto> getShiftHistory(LocalDateTime start, LocalDateTime end, String employeeIdFilter) {
+        String storeId = getCurrentUser().getStoreId();
+
+        // 1. Lấy tất cả các ca đã hoàn thành trong khoảng thời gian
+        List<WorkShiftEntity> completedShifts = workShiftRepository
+                .findByStoreIdAndScheduledStartTimeBetween(storeId, start, end)
+                .stream()
+                .filter(shift -> shift.getStatus() == WorkShiftEntity.ShiftStatus.COMPLETED)
+                .collect(Collectors.toList());
+
+        // Nếu có bộ lọc theo nhân viên, áp dụng nó
+        if (employeeIdFilter != null && !employeeIdFilter.isEmpty()) {
+            completedShifts = completedShifts.stream()
+                    .filter(shift -> shift.getAssignedEmployeeId().equals(employeeIdFilter))
+                    .collect(Collectors.toList());
+        }
+
+        if (completedShifts.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // 2. Tối ưu hóa: Lấy danh sách ID nhân viên và truy vấn tên một lần duy nhất
+        List<String> employeeIds = completedShifts.stream()
+                .map(WorkShiftEntity::getAssignedEmployeeId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        Map<String, String> employeeNamesMap = userRepository.findAllById(employeeIds).stream()
+                .collect(Collectors.toMap(UserEntity::getId, UserEntity::getFullName));
+
+        // 3. Chuyển đổi và tính toán cho mỗi ca
+        return completedShifts.stream().map(shift -> {
+            WorkShiftHistoryDto dto = new WorkShiftHistoryDto();
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+            // Thông tin cơ bản
+            dto.setEmployeeId(shift.getAssignedEmployeeId());
+            dto.setEmployeeName(employeeNamesMap.getOrDefault(shift.getAssignedEmployeeId(), "Không rõ"));
+            dto.setShiftDate(shift.getScheduledStartTime().toLocalDate());
+
+            // Định dạng giờ
+            dto.setFormattedScheduledTime(shift.getScheduledStartTime().format(timeFormatter) + " - " + shift.getScheduledEndTime().format(timeFormatter));
+            dto.setFormattedActualTime(shift.getActualClockInTime().format(timeFormatter) + " - " + shift.getActualClockOutTime().format(timeFormatter));
+
+            // Tính tổng giờ làm
+            Duration workedDuration = Duration.between(shift.getActualClockInTime(), shift.getActualClockOutTime());
+            long hours = workedDuration.toHours();
+            long minutes = workedDuration.toMinutesPart();
+            dto.setTotalWorkedHours(String.format("%dh %02dm", hours, minutes));
+
+            // Xác định trạng thái đi làm
+            boolean isLate = shift.getActualClockInTime().isAfter(shift.getScheduledStartTime());
+            boolean leftEarly = shift.getActualClockOutTime().isBefore(shift.getScheduledEndTime());
+
+            if (isLate && leftEarly) {
+                dto.setAttendanceStatus("BOTH"); // Vừa trễ vừa sớm
+            } else if (isLate) {
+                dto.setAttendanceStatus("LATE_ARRIVAL"); // Đi trễ
+            } else if (leftEarly) {
+                dto.setAttendanceStatus("EARLY_DEPARTURE"); // Về sớm
+            } else {
+                dto.setAttendanceStatus("ON_TIME"); // Đúng giờ
+            }
+
+            return dto;
+        }).collect(Collectors.toList());
     }
 }
