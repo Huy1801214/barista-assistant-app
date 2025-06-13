@@ -9,7 +9,8 @@ public class WorkShiftResponseDto {
     private String id;
     private String storeId;
     private String assignedEmployeeId;
-    private String assignedEmployeeName; // TRƯỜNG MỚI QUAN TRỌNG
+    private String assignedEmployeeName;
+    private String shiftName;
 
     private LocalDateTime scheduledStartTime;
     private LocalDateTime scheduledEndTime;
@@ -40,4 +41,6 @@ public class WorkShiftResponseDto {
     public void setStatus(WorkShiftEntity.ShiftStatus status) { this.status = status; }
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
+    public String getShiftName() { return shiftName; }
+    public void setShiftName(String shiftName) { this.shiftName = shiftName; }
 }

@@ -1,19 +1,24 @@
 package com.example.barista.service;
 
+import com.example.barista.data.Employee;
+import com.example.barista.data.User;
 import com.example.barista.data.Voucher;
 import com.example.barista.data.VoucherDto;
 import com.example.barista.data.WorkShift;
 import com.example.barista.request.LoginRequest;
 import com.example.barista.request.LoginResponse;
 import com.example.barista.request.RegisterRequest;
+import com.example.barista.request.WorkShiftRequest;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -48,6 +53,35 @@ public interface ApiService {
     // Nhân viên tự clock-out
     @POST("/api/work-shifts/{id}/clock-out")
     Call<WorkShift> clockOut(
+            @Header("Authorization") String authToken,
+            @Path("id") String shiftId
+    );
+
+    // Lấy danh sách nhân viên của cửa hàng
+    @GET("/api/users/staff")
+    Call<List<User>> getStaffList(@Header("Authorization") String authToken);
+
+    // Lấy chi tiết một ca làm việc
+    @GET("/api/work-shifts/{id}")
+    Call<WorkShift> getShiftDetails(@Header("Authorization") String authToken, @Path("id") String shiftId);
+
+    // Tạo ca làm việc mới
+    @POST("/api/work-shifts")
+    Call<WorkShift> createShift(@Header("Authorization") String authToken, @Body WorkShiftRequest request);
+
+    // Cập nhật ca làm việc
+    @PUT("/api/work-shifts/{id}")
+    Call<WorkShift> updateShift(@Header("Authorization") String authToken, @Path("id") String shiftId, @Body WorkShiftRequest request);
+
+    @GET("/api/work-shifts/my-shifts")
+    Call<List<WorkShift>> getMyShifts(
+            @Header("Authorization") String authToken,
+            @Query("start") String startDateTime,
+            @Query("end") String endDateTime
+    );
+
+    @DELETE("/api/work-shifts/{id}")
+    Call<Void> cancelShift(
             @Header("Authorization") String authToken,
             @Path("id") String shiftId
     );
