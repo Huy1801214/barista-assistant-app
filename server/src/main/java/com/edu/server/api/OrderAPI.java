@@ -36,10 +36,16 @@ public class OrderAPI {
 
         OrderEntity orderEntity = new OrderEntity(
                 request.getCreateAt(),
-                orderItemEntities
+                orderItemEntities,
+                request.getTotalPrice(),
+                request.getDiscount(),
+                request.getVoucher(),
+                request.getNote(),
+                request.getStoreId()
         );
 
         OrderEntity saved = orderRepository.save(orderEntity);
+        System.out.println(saved);
 
         return ResponseEntity.ok(ORDER_CREATE_COMPLETE);
     }

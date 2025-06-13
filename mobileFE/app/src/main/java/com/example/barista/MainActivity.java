@@ -34,43 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        testOrderMenu();
         orderButton = findViewById(R.id.orderButton);
-        orderButton.setOnClickListener(v -> testMenu());
     }
 
-    private void testOrderMenu() {
-        Sharedable.put(Cart.ID, new Cart());
-        Sharedable.put(ProductItems.ID, new ProductItems(List.of(
-                new ProductItem(
-                        0,
-                        "Cafe",
-                        10000,
-                        ""
-                )
-        )));
 
-        ProductItems p = (ProductItems) Sharedable.get(ProductItems.ID);
 
-        ((Cart) Sharedable.get(Cart.ID)).addNewItem(p.getItemById(0));
-        Intent intent = new Intent(this, ComfirmOrder.class);
-        startActivity(intent);
-    }
 
-    private void testMenu() {
-        Sharedable.put(Cart.ID, new Cart());
-        Sharedable.put(ProductItems.ID, new ProductItems(List.of(
-                new ProductItem(
-                        0,
-                        "Cafe",
-                        10000,
-                        ""
-                )
-        )));
-
-        ProductItems p = (ProductItems) Sharedable.get(ProductItems.ID);
-
-        ((Cart) Sharedable.get(Cart.ID)).addNewItem(p.getItemById(0));
-        Intent intent = new Intent(this, Menu.class);
-        startActivity(intent);
-
-    }
 }

@@ -12,11 +12,13 @@ public class LoginResponse {
     private UserInfo userInfo;
 
     public static class UserInfo {
+
         @SerializedName("fullName")
         private String fullName;
 
         @SerializedName("role")
         private String role;
+
 
         // Getters
         public String getFullName() {

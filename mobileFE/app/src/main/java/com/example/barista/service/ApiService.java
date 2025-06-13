@@ -25,7 +25,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface ApiService {
+public interface ApiService extends ProductApi, VouchersApi, UserApi {
     @POST("/api/auth/login")
     Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
 

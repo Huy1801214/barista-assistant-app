@@ -1,13 +1,13 @@
 package com.example.barista.data;
 
 public class OrderItem {
-    private int id;
+    private String id;
     private String itemName;
     private double itemPrice;
     private int quantity;
     private String thumbnailUrl;
 
-    public OrderItem(int id, String itemName, double itemPrice, int quantity, String thumbnailUrl) {
+    public OrderItem(String id, String itemName, double itemPrice, int quantity, String thumbnailUrl) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.quantity = quantity;
@@ -32,7 +32,7 @@ public class OrderItem {
         return thumbnailUrl;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 }

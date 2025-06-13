@@ -1,23 +1,23 @@
 package com.edu.server.request;
 
 public class OrderItem {
-    private int id;
+    private String id;
     private String itemName;
     private double itemPrice;
     private int quantity;
 
-    public OrderItem(int id, String itemName, double itemPrice, int quantity) {
+    public OrderItem(String id, String itemName, double itemPrice, int quantity) {
         this.id = id;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.quantity = quantity;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -7,7 +7,7 @@ import java.util.Map;
 public class ProductItems {
     public static final String ID = "productItems";
     private List<ProductItem> items;
-    private final Map<Integer, ProductItem> itemMap;
+    private final Map<String, ProductItem> itemMap;
 
     public ProductItems(List<ProductItem> items) {
         this.items = items;
@@ -42,7 +42,7 @@ public class ProductItems {
         return items.size();
     }
 
-    public ProductItem getItemById(int id) {
+    public ProductItem getItemById(String id) {
         return itemMap.get(id);
     }
 }

@@ -24,6 +24,9 @@ public class Voucher {
     @SerializedName("status")
     private String status; // Nhận về dạng "ACTIVE", "INACTIVE"
 
+    @SerializedName("value")
+    private double value;
+
     // Getters
     public String getId() { return id; }
     public String getName() { return name; }
@@ -66,6 +69,10 @@ public class Voucher {
         }
 
         return Status.ACTIVE;
+    }
+
+    public double getValue() {
+        return value;
     }
 
     public enum Status {

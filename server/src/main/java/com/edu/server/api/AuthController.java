@@ -57,4 +57,5 @@ public class AuthController {
         com.edu.server.dto.LoginResponse loginResponse = authService.login(loginRequest);
         return ResponseEntity.ok(loginResponse);
     }
+
 }

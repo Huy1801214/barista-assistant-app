@@ -19,7 +19,7 @@ public class UserService {
     private UserRepository userRepository;
 
     // Lấy UserEntity của người dùng đang đăng nhập
-    private UserEntity getCurrentUser() {
+    public UserEntity getCurrentUser() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Authenticated user not found in database"));

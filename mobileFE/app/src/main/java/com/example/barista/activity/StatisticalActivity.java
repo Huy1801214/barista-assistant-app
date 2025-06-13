@@ -3,6 +3,7 @@ package com.example.barista.activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 
 public class StatisticalActivity extends AppCompatActivity {
     TextView startLabelTime, startTextTime, endLabelTime, endTextTime;
+    ImageButton goBack;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +25,11 @@ public class StatisticalActivity extends AppCompatActivity {
         endLabelTime = findViewById(R.id.endLabelTime);
         endTextTime = findViewById(R.id.endTextTime);
 
+        goBack = findViewById(R.id.back_button);
+
         startTextTime.setOnClickListener(v -> showTimePicker(startTextTime));
         endTextTime.setOnClickListener(v -> showTimePicker(endTextTime));
+        goBack.setOnClickListener(v -> finish());
     }
 
     private void showTimePicker(TextView target) {

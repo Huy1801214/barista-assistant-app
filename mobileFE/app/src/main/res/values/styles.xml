@@ -4,5 +4,6 @@
     <dimen  name="text_size_normal">16sp</dimen>
     <dimen  name="text_size_h1">36sp</dimen>
     <dimen  name="text_size_h2">24sp</dimen>
+    <dimen  name="text_size_h3">18sp</dimen>
     <dimen  name="padding_1">10dp</dimen>
 </resources>

@@ -36,6 +36,11 @@ public class VoucherService {
         return voucherRepository.findByStoreId(storeId);
     }
 
+    public List<VoucherEntity> getVoucherForCurrentUser(String code) {
+        String storeId = getCurrentUserStoreId();
+        return voucherRepository.findByCode(storeId, code);
+    }
+
     // Tạo voucher mới
     public VoucherEntity createVoucher(VoucherDto voucherDto) {
         String storeId = getCurrentUserStoreId();

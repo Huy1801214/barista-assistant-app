@@ -97,4 +97,6 @@
     <string name="status_active">Đang hoạt động</string>
     <string name="status_inactive">Tạm ngưng</string>
     <string name="save_button">Lưu</string>
+    <string name="completeOrderMessage">Đơn hàng hoàn tất</string>
+    <string name="goBack">Quay về</string>
 </resources>

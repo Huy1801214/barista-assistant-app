@@ -28,6 +28,7 @@ public class User {
     @SerializedName("role")
     private String role; // Ví dụ: "OWNER", "MANAGER", "STAFF"
 
+
     // Constructors (không bắt buộc nhưng hữu ích cho việc test)
     public User() {
     }
@@ -68,6 +69,7 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
 
     @NonNull
     @Override

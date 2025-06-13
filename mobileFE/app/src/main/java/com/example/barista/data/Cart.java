@@ -8,6 +8,7 @@ import java.util.Map;
 public class Cart {
     public static final String ID = "cart";
     private Map<ProductItem, Integer> items;
+    private double discount = 0;
 
     public Cart() {
         items = new HashMap<>();
@@ -19,6 +20,19 @@ public class Cart {
         } else {
             items.put(item, 1);
         }
+    }
+
+    public void modifyItem(ProductItem item, int quantity) {
+        if (items.containsKey(item)) {
+            items.put(item, quantity);
+        }
+    }
+
+    public int getQuantity(ProductItem item) {
+        if (items.containsKey(item)) {
+            return items.get(item);
+        }
+        return 0;
     }
 
     public void removeItem(ProductItem item) {
@@ -59,4 +73,11 @@ public class Cart {
         return totalPrice;
     }
 
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
 }

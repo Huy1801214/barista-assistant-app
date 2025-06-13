@@ -14,7 +14,7 @@
         android:paddingBottom="8dp">
 
         <ImageView
-            android:id="@+id/imageViewProduct"
+            android:id="@+id/productList.imageViewProduct"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
@@ -22,7 +22,7 @@
             android:contentDescription="@string/product_image_desc" />
 
         <TextView
-            android:id="@+id/textViewProductName"
+            android:id="@+id/productList.textViewProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -36,7 +36,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textViewProductPrice"
+            android:id="@+id/productList.textViewProductPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

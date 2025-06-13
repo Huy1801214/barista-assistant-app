@@ -12,10 +12,13 @@ import android.widget.Toast;
 
 import com.example.barista.R;
 
+import com.example.barista.data.UserInfo;
+import com.example.barista.module.Sharedable;
 import com.example.barista.request.LoginRequest;
 import com.example.barista.request.LoginResponse;
 import com.example.barista.service.ApiClient;
 import com.example.barista.service.ApiService;
+import com.example.barista.service.UserApi;
 import com.example.barista.utils.SessionManager;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -30,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonLogin;
     private TextView textViewForgotPassword, textViewDeviceLogin, textViewRegister;
     private ApiService apiService;
+    private UserApi userApi;
     private SessionManager sessionManager;
 
     @Override
@@ -39,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // 1. Khởi tạo các thành phần logic
         apiService = ApiClient.getApiService();
+        userApi = apiService;
         sessionManager = new SessionManager(this);
 
         // 2. Kiểm tra xem người dùng đã đăng nhập trước đó chưa
@@ -124,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     LoginResponse.UserInfo userInfo = response.body().getUserInfo();
                     sessionManager.saveLoginSession(token, userInfo);
 
+
                     Toast.makeText(LoginActivity.this, getString(R.string.login_successful_toast), Toast.LENGTH_SHORT).show();
                     navigateToDashboard();
                 } else {
@@ -153,6 +159,18 @@ public class LoginActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         // Kết thúc LoginActivity hiện tại
+        userApi.getInfo("Bearer " + sessionManager.fetchAuthToken()).enqueue(new Callback<UserInfo>() {
+            @Override
+            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+                Sharedable.put(UserInfo.ID, response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserInfo> call, Throwable t) {
+                t.printStackTrace();
+                throw new RuntimeException(t.getMessage());
+            }
+        });
         finish();
     }
 }

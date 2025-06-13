@@ -47,6 +47,13 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
             // Handle other tabs if needed
             return false;
         });
+
+        CardView cardBaoCao = findViewById(R.id.cardViewBaoCao);
+
+        cardBaoCao.setOnClickListener(e -> {
+            Intent intent = new Intent(EmployeeDashboardActivity.this, StatisticalActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void displayUserInfo() {

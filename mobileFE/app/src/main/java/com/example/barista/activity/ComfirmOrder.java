@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.barista.R;
+import com.example.barista.fragments.CompleteOrder;
 import com.example.barista.fragments.OrderList;
 import com.example.barista.fragments.OrderPayment;
 
@@ -20,6 +21,8 @@ public class ComfirmOrder extends AppCompatActivity {
     private View orderListUnderLine, orderPaymentUnderLine;
     private static final Fragment ORDER_LIST_FRAGMENT = new OrderList();
     private static final Fragment ORDER_PAYMENT_FRAGMENT = new OrderPayment();
+    private static final Fragment ORDER_COMPELETE_FRAGMENT = new CompleteOrder();
+    private ImageButton goBack;
 
     public ComfirmOrder() {
         // Required empty public constructor
@@ -36,6 +39,7 @@ public class ComfirmOrder extends AppCompatActivity {
 
         orderListUnderLine    = findViewById(R.id.orderListUnderLine);
         orderPaymentUnderLine = findViewById(R.id.orderPaymentUnderLine);
+        goBack = findViewById(R.id.back_button);
 
         selectTab(0);
 
@@ -51,6 +55,13 @@ public class ComfirmOrder extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 selectTab(2);
+            }
+        });
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -75,6 +86,10 @@ public class ComfirmOrder extends AppCompatActivity {
     private void switchFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frame_order_view, fragment).commit();
+    }
+
+    public void switchToCompleteOrder() {
+        switchFragment(ORDER_COMPELETE_FRAGMENT);
     }
 
 }

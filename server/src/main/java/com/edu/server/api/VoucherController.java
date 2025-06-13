@@ -19,7 +19,11 @@ public class VoucherController {
 
     // API lấy tất cả voucher của cửa hàng (tất cả nhân viên đều xem được)
     @GetMapping
-    public ResponseEntity<List<VoucherEntity>> getAllVouchers() {
+    public ResponseEntity<List<VoucherEntity>> getAllVouchers(@RequestParam(name = "code", required = false) String code) {
+
+        if (code != null) {
+            return ResponseEntity.ok(voucherService.getVoucherForCurrentUser(code));
+        }
         List<VoucherEntity> vouchers = voucherService.getVouchersForCurrentUser();
         return ResponseEntity.ok(vouchers);
     }

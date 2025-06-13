@@ -61,7 +61,7 @@
 
             </Space>
             <EditText
-                android:id="@+id/discount"
+                android:id="@+id/voucher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/discount_hint">
@@ -134,40 +134,7 @@
             android:layout_height="16dp">
 
         </Space>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="@string/payment_method">
 
-        </TextView>
-        <RadioGroup
-            android:id="@+id/payment_method"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tien_mat">
-
-            </RadioButton>
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="0dp">
-
-            </Space>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cash">
-            </RadioButton>
-        </RadioGroup>
-        <Space
-            android:layout_width="16dp"
-            android:layout_height="16dp">
-
-        </Space>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -250,6 +217,7 @@
             android:layout_height="match_parent">
 
             <Button
+                android:id="@+id/createOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
