@@ -27,6 +27,7 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
     private Button orderButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,10 @@ public class MenuActivity extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.menu_close_shift) {
                     // Xử lý đóng ca
+                    return true;
+                } else if (itemId == R.id.menu_shift_history) {
+                    Intent intent = new Intent(MenuActivity.this, ShiftHistoryActivity.class);
+                    startActivity(intent);
                     return true;
                 }
 

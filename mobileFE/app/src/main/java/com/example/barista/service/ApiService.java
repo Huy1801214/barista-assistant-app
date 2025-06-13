@@ -1,10 +1,13 @@
 package com.example.barista.service;
 
+import androidx.annotation.Nullable;
+
 import com.example.barista.data.Employee;
 import com.example.barista.data.User;
 import com.example.barista.data.Voucher;
 import com.example.barista.data.VoucherDto;
 import com.example.barista.data.WorkShift;
+import com.example.barista.data.WorkShiftHistory;
 import com.example.barista.request.LoginRequest;
 import com.example.barista.request.LoginResponse;
 import com.example.barista.request.RegisterRequest;
@@ -84,5 +87,13 @@ public interface ApiService {
     Call<Void> cancelShift(
             @Header("Authorization") String authToken,
             @Path("id") String shiftId
+    );
+
+    @GET("/api/history/work-shifts")
+    Call<List<WorkShiftHistory>> getShiftHistory(
+            @Header("Authorization") String authToken,
+            @Query("startDate") String startDate,
+            @Query("endDate") String endDate,
+            @Query("employeeId") @Nullable String employeeId // Gửi null nếu không có
     );
 }
