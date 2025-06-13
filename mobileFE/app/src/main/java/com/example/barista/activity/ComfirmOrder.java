@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.barista.OrderList;
-import com.example.barista.OrderPayment;
 import com.example.barista.R;
+import com.example.barista.fragments.OrderList;
+import com.example.barista.fragments.OrderPayment;
 
 
 public class ComfirmOrder extends AppCompatActivity {
@@ -39,7 +39,6 @@ public class ComfirmOrder extends AppCompatActivity {
 
         selectTab(0);
 
-        // 3. Thiết lập OnClickListener cho từng nút
         orderListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,11 +57,9 @@ public class ComfirmOrder extends AppCompatActivity {
     }
 
     private void selectTab(int tabIndex) {
-        // 1. Ẩn hết các underline trước
         orderListUnderLine.setVisibility(View.INVISIBLE);
         orderPaymentUnderLine.setVisibility(View.INVISIBLE);
 
-        // 2. Hiển thị underline tương ứng
         switch (tabIndex) {
             case 0:
                 orderListUnderLine.setVisibility(View.VISIBLE);

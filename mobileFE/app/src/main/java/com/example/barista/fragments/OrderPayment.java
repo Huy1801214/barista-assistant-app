@@ -1,12 +1,10 @@
-package com.example.barista;
+package com.example.barista.fragments;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,14 +14,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.barista.adpater.OrderListAdapter;
+import com.example.barista.R;
 import com.example.barista.data.Cart;
-import com.example.barista.data.OrderItem;
 import com.example.barista.module.Sharedable;
 import com.example.barista.utils.NumberFormat;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OrderPayment extends Fragment {
 

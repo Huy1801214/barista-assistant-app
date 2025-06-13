@@ -1,4 +1,4 @@
-package com.example.barista;
+package com.example.barista.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,12 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.barista.R;
 import com.example.barista.adpater.OrderListAdapter;
 import com.example.barista.data.Cart;
-import com.example.barista.data.OrderItem;
 import com.example.barista.module.Sharedable;
-
-import java.util.List;
 
 public class OrderList extends Fragment {
 
