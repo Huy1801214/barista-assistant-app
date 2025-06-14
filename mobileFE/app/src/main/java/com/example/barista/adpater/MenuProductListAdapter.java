@@ -13,7 +13,9 @@ import com.bumptech.glide.Glide;
 import com.example.barista.R;
 import com.example.barista.data.ProductItem;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class MenuProductListAdapter extends RecyclerView.Adapter<MenuProductListAdapter.ViewHolder>{
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,8 +47,9 @@ public class MenuProductListAdapter extends RecyclerView.Adapter<MenuProductList
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductItem item = itemList.get(position);
-        holder.textViewProductName.setText(item.getItemName());
-        holder.textViewProductPrice.setText(String.valueOf(item.getItemPrice()));
+        holder.textViewProductName.setText(item.getName());
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        holder.textViewProductPrice.setText(currencyFormat.format(item.getItemPrice()));
         // Load thumbnail image using Glide or Picasso
         Glide.with(holder.itemView.getContext()).load(item.getThumbnailUrl()).centerCrop().error(R.drawable.ic_launcher_background).into(holder.imageViewProduct);
     }

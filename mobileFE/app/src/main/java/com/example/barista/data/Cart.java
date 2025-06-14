@@ -56,7 +56,7 @@ public class Cart {
             ProductItem item = entry.getKey();
             int quantity = entry.getValue();
 
-            OrderItem orderItem = new OrderItem(item.getItemId(), item.getItemName(), item.getItemPrice(), quantity, item.getThumbnailUrl());
+            OrderItem orderItem = new OrderItem(item.getId(), item.getName(), item.getItemPrice(), quantity, item.getThumbnailUrl());
             orderItems.add(orderItem);
         }
 

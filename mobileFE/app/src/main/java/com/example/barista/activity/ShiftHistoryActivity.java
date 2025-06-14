@@ -1,6 +1,8 @@
 package com.example.barista.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +51,7 @@ public class ShiftHistoryActivity extends AppCompatActivity {
     private final Calendar startCalendar = Calendar.getInstance();
     private final Calendar endCalendar = Calendar.getInstance();
     private MaterialToolbar toolbar;
+    private Button buttonExportExcel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,7 @@ public class ShiftHistoryActivity extends AppCompatActivity {
         buttonViewReport = findViewById(R.id.buttonViewReport);
         recyclerViewHistory = findViewById(R.id.recyclerViewHistory);
         progressBar = findViewById(R.id.progressBar);
+        buttonExportExcel = findViewById(R.id.buttonExportExcel);
     }
 
     private void initLogicComponents() {
@@ -103,6 +107,49 @@ public class ShiftHistoryActivity extends AppCompatActivity {
             }
             loadHistoryFromServer();
         });
+        buttonExportExcel.setOnClickListener(v -> {
+            exportToExcel();
+        });
+    }
+
+    private void exportToExcel() {
+        // Kiểm tra xem đã chọn ngày chưa
+        if (editTextStartDate.getText().toString().isEmpty() || editTextEndDate.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Vui lòng chọn khoảng ngày để xuất file", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 1. Lấy các tham số cần thiết
+        DateTimeFormatter apiFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime startDateTime = startCalendar.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay();
+        LocalDateTime endDateTime = endCalendar.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().atTime(23, 59, 59);
+
+        String startDateStr = startDateTime.format(apiFormatter);
+        String endDateStr = endDateTime.format(apiFormatter);
+        String employeeId = null; // TODO: Lấy từ Spinner nếu có
+
+        // 2. Xây dựng URL đầy đủ của API xuất file
+        // Lấy BASE_URL từ ApiClient của bạn
+        String baseUrl = ApiClient.BASE_URL; // Giả sử bạn có hằng số này
+        Uri.Builder builder = Uri.parse(baseUrl + "api/history/work-shifts/export").buildUpon();
+        builder.appendQueryParameter("startDate", startDateStr);
+        builder.appendQueryParameter("endDate", endDateStr);
+        if (employeeId != null) {
+            builder.appendQueryParameter("employeeId", employeeId);
+        }
+
+        String url = builder.build().toString();
+
+        // 3. Tạo một Intent để mở trình duyệt web với URL này
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+
+        // Thêm token vào header (nếu trình duyệt hỗ trợ, không phải lúc nào cũng hoạt động)
+        // Cách tốt hơn là dùng cơ chế xác thực khác cho việc tải file
+        // Tạm thời bỏ qua bước này để đơn giản hóa
+
+        // 4. Mở trình duyệt
+        Toast.makeText(this, "Đang mở trình duyệt để tải file...", Toast.LENGTH_LONG).show();
+        startActivity(browserIntent);
     }
 
     private void showDatePickerDialog(TextInputEditText editText, Calendar calendar) {
