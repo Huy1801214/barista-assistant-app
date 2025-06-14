@@ -3,6 +3,7 @@ package com.example.barista.adpater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,15 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.barista.R;
+import com.example.barista.activity.MenuActivity;
+import com.example.barista.data.Cart;
 import com.example.barista.data.ProductItem;
+import com.example.barista.module.Sharedable;
 
 import java.util.List;
 
 public class MenuProductListAdapter extends RecyclerView.Adapter<MenuProductListAdapter.ViewHolder>{
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewProduct;
         TextView textViewProductName;
         TextView textViewProductPrice;
+        Button buttonAddToCart;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -27,12 +33,16 @@ public class MenuProductListAdapter extends RecyclerView.Adapter<MenuProductList
             imageViewProduct = itemView.findViewById(R.id.productList_imageViewProduct);
             textViewProductName = itemView.findViewById(R.id.productList_textViewProductName);
             textViewProductPrice = itemView.findViewById(R.id.productList_textViewProductPrice);
+            buttonAddToCart = itemView.findViewById(R.id.productList_buttonAddToCart);
         }
     }
 
+    private MenuActivity menuActivity;
+
     private List<ProductItem> itemList;
-    public MenuProductListAdapter(List<ProductItem> itemList) {
+    public MenuProductListAdapter(List<ProductItem> itemList, MenuActivity menuActivity) {
         this.itemList = itemList;
+        this.menuActivity = menuActivity;
     }
 
     @NonNull
@@ -49,6 +59,16 @@ public class MenuProductListAdapter extends RecyclerView.Adapter<MenuProductList
         holder.textViewProductPrice.setText(String.valueOf(item.getItemPrice()));
         // Load thumbnail image using Glide or Picasso
         Glide.with(holder.itemView.getContext()).load(item.getThumbnailUrl()).centerCrop().error(R.drawable.ic_launcher_background).into(holder.imageViewProduct);
+        holder.buttonAddToCart.setOnClickListener(e -> {
+            Cart cart = (Cart) Sharedable.get(Cart.ID);
+            if (cart == null) {
+                cart = new Cart();
+                Sharedable.put(Cart.ID, cart);
+            }
+
+            cart.addNewItem(item);
+            menuActivity.updateTotalAmountValue();
+        });
     }
 
     @Override

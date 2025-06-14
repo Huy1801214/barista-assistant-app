@@ -99,4 +99,6 @@
     <string name="save_button">Lưu</string>
     <string name="completeOrderMessage">Đơn hàng hoàn tất</string>
     <string name="goBack">Quay về</string>
+    <string name="addToCart">Thêm</string>
+    <string name="deleteFromCart">Xóa khỏi đơn hàng</string>
 </resources>

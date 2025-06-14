@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.barista.R;
+import com.example.barista.data.Cart;
+import com.example.barista.module.Sharedable;
 
 
 public class CompleteOrder extends Fragment {

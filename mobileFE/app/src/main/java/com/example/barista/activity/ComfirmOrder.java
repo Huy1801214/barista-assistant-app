@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.barista.R;
+import com.example.barista.data.Cart;
 import com.example.barista.fragments.CompleteOrder;
 import com.example.barista.fragments.OrderList;
 import com.example.barista.fragments.OrderPayment;
+import com.example.barista.module.Sharedable;
 
 
 public class ComfirmOrder extends AppCompatActivity {
@@ -23,7 +25,6 @@ public class ComfirmOrder extends AppCompatActivity {
     private static final Fragment ORDER_PAYMENT_FRAGMENT = new OrderPayment();
     private static final Fragment ORDER_COMPELETE_FRAGMENT = new CompleteOrder();
     private ImageButton goBack;
-
     public ComfirmOrder() {
         // Required empty public constructor
     }
@@ -90,6 +91,10 @@ public class ComfirmOrder extends AppCompatActivity {
 
     public void switchToCompleteOrder() {
         switchFragment(ORDER_COMPELETE_FRAGMENT);
+        Cart cart = (Cart) Sharedable.get(Cart.ID);
+        if (cart != null) {
+            cart.clear();
+        }
     }
 
 }

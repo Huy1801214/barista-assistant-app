@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ import retrofit2.Response;
 public class MenuActivity extends AppCompatActivity {
     private Button orderButton;
     ProductApi productApi;
+    private TextView textViewTotalAmountValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,9 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
         orderButton = findViewById(R.id.buttonPayment);
+        textViewTotalAmountValue = findViewById(R.id.textViewTotalAmountValue);
         orderButton.setOnClickListener(v -> openOrderMenu());
+        MenuActivity instance = this;
 
         ImageView threePoint = findViewById(R.id.imageViewAction3);
         threePoint.setOnClickListener(v -> {
@@ -87,7 +91,7 @@ public class MenuActivity extends AppCompatActivity {
                 assert response.body() != null;
                 ProductItems productItems = new ProductItems(response.body());
                 Sharedable.put(ProductItems.ID, productItems);
-                var productListAdapter = new MenuProductListAdapter(productItems.getItems());
+                var productListAdapter = new MenuProductListAdapter(productItems.getItems(), instance);
                 RecyclerView productList = findViewById(R.id.recyclerViewProducts);
                 productList.setAdapter(productListAdapter);
 
@@ -103,6 +107,16 @@ public class MenuActivity extends AppCompatActivity {
     private void openOrderMenu() {
         Intent intent = new Intent(this, ComfirmOrder.class);
         startActivity(intent);
+
+    }
+
+    public void updateTotalAmountValue() {
+        Cart cart = (Cart)Sharedable.get(Cart.ID);
+        if (cart != null) {
+            int totalAmount = cart.getTotalItemAmount();
+            textViewTotalAmountValue.setText(String.valueOf(totalAmount));
+
+        }
 
     }
 
