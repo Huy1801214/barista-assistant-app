@@ -8,14 +8,28 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.barista.R;
+import com.example.barista.adpater.OrderHistoryAdapter;
+import com.example.barista.response.StatisticalResponse;
+import com.example.barista.service.ApiClient;
+import com.example.barista.service.StatisticalApi;
+import com.example.barista.utils.NumberFormat;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class StatisticalActivity extends AppCompatActivity {
     TextView startLabelTime, startTextTime, endLabelTime, endTextTime;
     ImageButton goBack;
+    StatisticalApi statisticalApi = ApiClient.getClient().create(StatisticalApi.class);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +44,17 @@ public class StatisticalActivity extends AppCompatActivity {
         startTextTime.setOnClickListener(v -> showTimePicker(startTextTime));
         endTextTime.setOnClickListener(v -> showTimePicker(endTextTime));
         goBack.setOnClickListener(v -> finish());
+        createDefaultDate();
     }
+
+    private void createDefaultDate() {
+        LocalDate today = LocalDate.now();
+        String displayDate = today.getDayOfMonth() + "/" + today.getMonthValue() + "/" + today.getYear();
+        startTextTime.setText(displayDate);
+        endTextTime.setText(displayDate);
+        createReport();
+    }
+
 
     private void showTimePicker(TextView target) {
         Calendar calendar = Calendar.getInstance();
@@ -47,10 +71,61 @@ public class StatisticalActivity extends AppCompatActivity {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
             target.setText(dayOfMonth + "/" + (month1 + 1) + "/" + year1);
+            createReport();
         }, year, month, today);
 
         datePickerDialog.setTitle("Chọn ngày");
         datePickerDialog.show();
 
+
+    }
+
+    private String convertToISOFormat(String date) {
+        String[] parts = date.split("/");
+        String day = parts[0];
+        String month = parts[1];
+        String year = parts[2];
+
+        // Thêm 0 vào trước ngày và tháng nếu cần
+        if (day.length() == 1) {
+            day = "0" + day;
+        }
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
+
+        return year + "-" + month + "-" + day;
+    }
+    private void createReport() {
+        //Lấy ngày bắt đầu và kết thúc từ 2 textview
+        String startDate = startTextTime.getText().toString();
+        String endDate = endTextTime.getText().toString();
+
+        startDate = convertToISOFormat(startDate);
+        endDate = convertToISOFormat(endDate);
+
+        statisticalApi.getStatistical(startDate, endDate).enqueue(new Callback<StatisticalResponse>() {
+
+            @Override
+            public void onResponse(Call<StatisticalResponse> call, Response<StatisticalResponse> response) {
+                StatisticalResponse statisticalResponse = response.body();
+                if (statisticalResponse != null) {
+                    TextView orderCount = findViewById(R.id.orderCountText);
+                    TextView revenue = findViewById(R.id.revenueText);
+                    TextView discount = findViewById(R.id.discountText);
+                    orderCount.setText(String.valueOf(statisticalResponse.getOrderCount()));
+                    revenue.setText(NumberFormat.formatMoney(statisticalResponse.getRevenue()));
+                    discount.setText(NumberFormat.formatMoney(statisticalResponse.getDiscount()));
+
+                    RecyclerView history = findViewById(R.id.orderHistory);
+                    history.setAdapter(new OrderHistoryAdapter(statisticalResponse));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StatisticalResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

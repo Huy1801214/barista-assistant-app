@@ -2,18 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="@dimen/padding_1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã đơn hàng:"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_h3">
+
+        </TextView>
+        <Space
+            android:layout_width="@dimen/padding_1"
+            android:layout_height="@dimen/padding_1">
+
+        </Space>
+        <TextView
+            android:id="@+id/orderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã đơn hàng"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_h3">
+
+        </TextView>
+    </LinearLayout>
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="10dp">
+
+    </Space>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2">
         <TextView
-            android:id="@+id/orderId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Mã đơn hàng"
+            android:text="Giá"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_h3"

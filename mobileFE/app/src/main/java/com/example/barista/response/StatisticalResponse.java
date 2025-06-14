@@ -1,6 +1,6 @@
-package com.edu.server.response;
+package com.example.barista.response;
 
-import com.edu.server.collection.OrderEntity;
+import com.example.barista.data.OrderEntity;
 
 import java.util.List;
 

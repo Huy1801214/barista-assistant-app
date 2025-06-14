@@ -48,7 +48,8 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/storage/**",
                                 "/api/products",
-                                "/order"
+                                "/order",
+                                "/statistical"
                         )
                         .permitAll()
                         .anyRequest().authenticated()
