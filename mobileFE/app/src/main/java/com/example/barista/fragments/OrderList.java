@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.barista.R;
 import com.example.barista.activity.ComfirmOrder;
@@ -21,7 +22,8 @@ import com.example.barista.data.ProductItems;
 import com.example.barista.module.Sharedable;
 
 public class OrderList extends Fragment {
-    ComfirmOrder comfirmOrder;
+
+    TextView productOrderListLabel;
 
     public OrderList() {
         // Required empty public constructor
@@ -34,13 +36,16 @@ public class OrderList extends Fragment {
         return fragment;
     }
 
-    public void setComfirmOrder(ComfirmOrder comfirmOrder) {
-        this.comfirmOrder = comfirmOrder;
-    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Cart cart = (Cart) Sharedable.get(Cart.ID);
+        if (cart == null) {
+            cart = new Cart();
+            Sharedable.put(Cart.ID, cart);
+        }
+
         super.onCreate(savedInstanceState);
     }
 
@@ -54,19 +59,26 @@ public class OrderList extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Cart cart = (Cart) Sharedable.get(Cart.ID);
+        productOrderListLabel = view.findViewById(R.id.productOrderListLabel);
         if (cart == null) {
             cart = new Cart();
             Sharedable.put(Cart.ID, cart);
         }
 
-        addSampleData();
+        if (cart.getItems().isEmpty()) {
+            productOrderListLabel.setText("Không có sản phẩm.");
+            return;
+        }
 
         // Set up RecyclerView and adapter
 
+        productOrderListLabel.setText(R.string.product_order_list);
+
         RecyclerView recyclerView = view.findViewById(R.id.orderRecyclerView);
+
         Context ctx = requireContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
-        var adapter = new OrderListAdapter(this, cart.getOrderItems());
+        var adapter = new OrderListAdapter(cart.getOrderItems());
         recyclerView.setAdapter(adapter);
     }
 

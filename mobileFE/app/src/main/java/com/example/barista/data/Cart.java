@@ -8,7 +8,6 @@ import java.util.Map;
 public class Cart {
     public static final String ID = "cart";
     private Map<ProductItem, Integer> items;
-    private double discount = 0;
 
     public Cart() {
         items = new HashMap<>();
@@ -45,6 +44,25 @@ public class Cart {
         }
     }
 
+    public void removeItem(String itemId) {
+        for (Map.Entry<ProductItem, Integer> entry : items.entrySet()) {
+            if (entry.getKey().getItemId().equals(itemId)) {
+                items.remove(entry.getKey());
+                break;
+            }
+        }
+    }
+
+    public ProductItem getItem(String itemId) {
+        for (Map.Entry<ProductItem, Integer> entry : items.entrySet()) {
+            if (entry.getKey().getItemId().equals(itemId)) {
+                return entry.getKey();
+            }
+        }
+
+        return null;
+    }
+
     public Map<ProductItem, Integer> getItems() {
         return items;
     }
@@ -73,11 +91,20 @@ public class Cart {
         return totalPrice;
     }
 
-    public double getDiscount() {
-        return discount;
+
+    public void clear() {
+        items.clear();
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
+    public int getTotalItemAmount() {
+        int totalAmount = 0;
+
+        for (Map.Entry<ProductItem, Integer> entry : items.entrySet()) {
+            ProductItem item = entry.getKey();
+            int quantity = entry.getValue();
+            totalAmount += quantity;
+        }
+
+        return totalAmount;
     }
 }
