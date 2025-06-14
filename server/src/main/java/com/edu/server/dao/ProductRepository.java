@@ -25,4 +25,5 @@ public interface ProductRepository extends MongoRepository<ProductEntity, String
      * @return Danh sách các Product thỏa mãn điều kiện.
      */
     List<ProductEntity> findByStoreIdAndCategoryId(String storeId, String categoryId);
+    List<ProductEntity> findByCategoryId(String categoryId);
 }

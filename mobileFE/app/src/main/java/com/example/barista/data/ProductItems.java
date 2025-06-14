@@ -14,7 +14,7 @@ public class ProductItems {
         this.itemMap = new HashMap<>();
 
         for (ProductItem item : items) {
-            itemMap.put(item.getItemId(), item);
+            itemMap.put(item.getId(), item);
         }
 
     }
@@ -26,12 +26,12 @@ public class ProductItems {
 
     public void addItem(ProductItem item) {
         items.add(item);
-        itemMap.put(item.getItemId(), item);
+        itemMap.put(item.getId(), item);
     }
 
     public void removeItem(ProductItem item) {
         items.remove(item);
-        itemMap.remove(item.getItemId());
+        itemMap.remove(item.getId());
     }
 
     public ProductItem getItem(int index) {
