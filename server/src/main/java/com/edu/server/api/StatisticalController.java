@@ -41,15 +41,23 @@ public class StatisticalController {
 
         double revenue = 0;
         double discount = 0;
+        double total = 0;
+        int discountCount = 0;
         for (var orderEntity : history) {
             discount += orderEntity.getDiscount();
+            if (orderEntity.getDiscount() > 0) {
+                discountCount++;
+            }
             revenue += orderEntity.getTotalPrice() - orderEntity.getDiscount();
+            total += orderEntity.getTotalPrice();
         }
 
         statisticalResponse.setDiscount(discount);
         statisticalResponse.setHistory(history);
         statisticalResponse.setOrderCount(history.size());
         statisticalResponse.setRevenue(revenue);
+        statisticalResponse.setTotal(total);
+        statisticalResponse.setDiscountCount(discountCount);
 
         return ResponseEntity.ok(statisticalResponse);
 
