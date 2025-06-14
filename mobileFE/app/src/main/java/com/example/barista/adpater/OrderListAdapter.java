@@ -19,6 +19,7 @@ import com.example.barista.data.Cart;
 import com.example.barista.data.OrderItem;
 import com.example.barista.data.ProductItem;
 import com.example.barista.module.Sharedable;
+import com.example.barista.utils.NumberFormat;
 
 import java.util.List;
 
@@ -39,9 +40,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OrderItem item = itemList.get(position);
         holder.productName.setText(item.getQuantity() + " x " + item.getItemName());
-        holder.productPrice.setText(String.valueOf(item.getItemPrice()));
+        holder.productPrice.setText(NumberFormat.formatMoney(item.getItemPrice()));
         // Load thumbnail image using Glide or Picasso
-         Glide.with(holder.itemView.getContext()).load(item.getThumbnailUrl()).centerCrop().error(R.drawable.ic_launcher_background).into(holder.thumbnailImageView);
+        Glide.with(holder.itemView.getContext()).load(item.getThumbnailUrl()).centerCrop().error(R.drawable.ic_launcher_background).into(holder.thumbnailImageView);
         holder.deleteFromCartButton.setOnClickListener(e -> {
             Cart cart = (Cart) Sharedable.get(Cart.ID);
             if (cart != null) {
