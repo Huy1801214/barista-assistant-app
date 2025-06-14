@@ -46,7 +46,7 @@ public class Cart {
 
     public void removeItem(String itemId) {
         for (Map.Entry<ProductItem, Integer> entry : items.entrySet()) {
-            if (entry.getKey().getItemId().equals(itemId)) {
+            if (entry.getKey().getId().equals(itemId)) {
                 items.remove(entry.getKey());
                 break;
             }
@@ -55,7 +55,7 @@ public class Cart {
 
     public ProductItem getItem(String itemId) {
         for (Map.Entry<ProductItem, Integer> entry : items.entrySet()) {
-            if (entry.getKey().getItemId().equals(itemId)) {
+            if (entry.getKey().getId().equals(itemId)) {
                 return entry.getKey();
             }
         }
