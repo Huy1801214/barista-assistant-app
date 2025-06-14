@@ -2,7 +2,6 @@ package com.edu.server.api;
 
 import com.edu.server.collection.ProductEntity;
 import com.edu.server.dao.ProductRepository;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,20 +11,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
+
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
+
     @GetMapping
-    public ResponseEntity<String> getItem(@RequestParam(name = "id", required = false) String id) {
-        if (id != null && !id.isEmpty()) {
-            ProductEntity e =  productRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
-            Gson gson = new Gson();
-            String json = gson.toJson(e);
-            return ResponseEntity.ok(json);
+    public ResponseEntity<List<ProductEntity>> getProducts(
+            @RequestHeader("Authorization") String token,
+            @RequestParam(name = "categoryId", required = false) String categoryId) {
+        List<ProductEntity> products;
+        if (categoryId != null && !categoryId.isEmpty()) {
+            products = productRepository.findByCategoryId(categoryId);
+        } else {
+            products = productRepository.findAll();
         }
 
-        List<ProductEntity> ps = productRepository.findAll();
-        Gson gson = new Gson();
-        String json = gson.toJson(ps);
-        return ResponseEntity.ok(json);
+        return ResponseEntity.ok(products);
     }
 }

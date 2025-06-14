@@ -2,7 +2,9 @@ package com.example.barista.service;
 
 import androidx.annotation.Nullable;
 
+import com.example.barista.data.Category;
 import com.example.barista.data.Employee;
+import com.example.barista.data.ProductItem;
 import com.example.barista.data.User;
 import com.example.barista.data.Voucher;
 import com.example.barista.data.VoucherDto;
@@ -95,5 +97,13 @@ public interface ApiService extends ProductApi, VouchersApi, UserApi {
             @Query("startDate") String startDate,
             @Query("endDate") String endDate,
             @Query("employeeId") @Nullable String employeeId // Gửi null nếu không có
+    );
+    @GET("/api/categories")
+    Call<List<Category>> getCategories(@Header("Authorization") String authToken);
+
+    @GET("/api/products")
+    Call<List<ProductItem>> getProducts(
+            @Header("Authorization") String authToken,
+            @Query("categoryId") String categoryId
     );
 }
