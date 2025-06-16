@@ -1,28 +1,73 @@
 package com.example.barista.data;
 
-public class Employee {
-    private String id;
-    private String fullName;
-    private String role; // Ví dụ: "Quản lý", "Nhân viên"
-    private String email;
+import com.google.gson.annotations.SerializedName;
 
-    public Employee(String fullName, String role, String email) {
-        this.fullName = fullName;
-        this.role = role;
-        this.email = email;
+public class Employee {
+    @SerializedName("id")
+    private String id;
+    @SerializedName("fullName")
+    private String fullName;
+    @SerializedName("role")
+    private String role; // Nhận về "MANAGER" hoặc "STAFF"
+    @SerializedName("email")
+    private String email;
+    @SerializedName("phoneNumber")
+    private String phoneNumber;
+    @SerializedName("active")
+    private boolean isActive;
+
+    public String getId() {
+        return id;
     }
 
-    // Getters
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getFullName() {
         return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getRole() {
         return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String getDisplayRole() {
+        if ("MANAGER".equalsIgnoreCase(role)) return "Quản lý";
+        if ("STAFF".equalsIgnoreCase(role)) return "Nhân viên";
+        return "Không xác định";
     }
 
     // Tiện ích để lấy chữ cái đầu của tên

@@ -14,6 +14,7 @@ public class OrderRequest {
         private String itemName;
         private double itemPrice;
         private int quantity;
+        private String voucherCode;
 
 
         public RequestOrderItem(String id, String itemName, double itemPrice, int quantity) {

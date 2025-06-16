@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import com.example.barista.data.Category;
 import com.example.barista.data.Employee;
 import com.example.barista.data.ProductItem;
+import com.example.barista.data.StaffRequestDto;
 import com.example.barista.data.User;
 import com.example.barista.data.Voucher;
 import com.example.barista.data.VoucherDto;
@@ -136,13 +137,16 @@ public interface ApiService extends ProductApi, VouchersApi, UserApi {
 
     @GET("/api/google/auth/url")
     Call<String> getGoogleAuthUrl(@Header("Authorization") String authToken);
-  
-    @POST("/api/employees")
-    Call<User> createEmployee(@Body User user);
 
-    @PUT("/api/employees/{id}")
-    Call<User> updateEmployee(@Path("id") String id, @Body User user);
+    @GET("/api/staff")
+    Call<List<Employee>> getAllStaff(@Header("Authorization") String authToken);
 
-    @DELETE("/api/employees/{id}")
-    Call<Void> deleteEmployee(@Path("id") String id);
+    @POST("/api/staff")
+    Call<Employee> createStaff(@Header("Authorization") String authToken, @Body StaffRequestDto staffDto);
+
+    @PUT("/api/staff/{id}")
+    Call<Employee> updateStaff(@Header("Authorization") String authToken, @Path("id") String staffId, @Body StaffRequestDto staffDto);
+
+    @DELETE("/api/staff/{id}")
+    Call<Void> deleteStaff(@Header("Authorization") String authToken, @Path("id") String staffId);
 }
