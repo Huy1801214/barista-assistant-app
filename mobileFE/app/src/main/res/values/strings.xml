@@ -101,4 +101,18 @@
     <string name="goBack">Quay về</string>
     <string name="addToCart">Thêm</string>
     <string name="deleteFromCart">Xóa khỏi đơn hàng</string>
+    <string name="revenue_stats_title">Thống kê doanh thu</string>
+    <string name="desc_back_button">Quay lại màn hình trước</string>
+    <string name="start_date_label">Ngày bắt đầu:</string>
+    <string name="end_date_label">Ngày kết thúc:</string>
+    <string name="date_placeholder">--/--/--</string>
+    <string name="total_revenue_label">Tổng doanh thu</string>
+    <string name="order_count_label">Số lượng đơn hàng</string>
+    <string name="discounted_label">Đã giảm giá</string>
+    <string name="customer_count_label">Số lượt khách</string>
+    <string name="invoice_label">Hóa đơn</string>
+    <string name="sales_label">Doanh số</string>
+    <string name="paid_label">Đã thanh toán</string>
+    <string name="item_discount_label">Món giảm giá</string>
+    <string name="order_history_label">Lịch sử đơn hàng</string>
 </resources>

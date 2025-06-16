@@ -5,6 +5,8 @@
     <dimen name="text_size_h1">36sp</dimen>
     <dimen name="text_size_h2">24sp</dimen>
     <dimen name="text_size_h3">18sp</dimen>
+    <dimen  name="padding_0_25">2dp</dimen>
+    <dimen  name="padding_0_5">5dp</dimen>
     <dimen name="padding_1">10dp</dimen>
 
     <style name="SettingsMenuItemContainer" parent="">
