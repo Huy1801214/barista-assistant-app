@@ -40,7 +40,7 @@ public class Voucher {
     public String getCode() { return code; }
     public String getStatus() { return status; }
 
-    public VoucherType getType() {return type}
+    public VoucherType getType() {return type; }
 
 
 
