@@ -16,6 +16,7 @@ public class OrderEntity {
     private String voucher;
     private String storeId;
     private String note;
+    private String appliedVoucherCode;
 
     public OrderEntity() {}
 
