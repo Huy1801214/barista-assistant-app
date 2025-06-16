@@ -2,16 +2,19 @@ package com.edu.server.service;
 
 import com.edu.server.collection.UserEntity;
 import com.edu.server.collection.WorkShiftEntity;
+import com.edu.server.config.GoogleApiProperties;
 import com.edu.server.dao.UserRepository;
 import com.edu.server.dao.WorkShiftRepository;
 import com.edu.server.dto.WorkShiftHistoryDto;
 import com.edu.server.dto.WorkShiftRequest;
 import com.edu.server.dto.WorkShiftResponseDto;
+import com.google.api.client.util.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,6 +32,10 @@ public class WorkShiftService {
     private WorkShiftRepository workShiftRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private GoogleCalendarService googleCalendarService;
+    @Autowired
+    private GoogleApiProperties googleApiProperties;
 
     /**
      * Lấy thông tin UserEntity của người dùng đang đăng nhập từ SecurityContext.
@@ -106,7 +113,6 @@ public class WorkShiftService {
      */
     public WorkShiftResponseDto createShift(WorkShiftRequest request) {
         UserEntity manager = getCurrentUser();
-
         WorkShiftEntity shift = new WorkShiftEntity();
         shift.setStoreId(manager.getStoreId());
         shift.setAssignedEmployeeId(request.getAssignedEmployeeId());
@@ -116,6 +122,28 @@ public class WorkShiftService {
         shift.setStatus(WorkShiftEntity.ShiftStatus.SCHEDULED);
 
         WorkShiftEntity savedShift = workShiftRepository.save(shift);
+        if (manager.getGoogleRefreshToken() != null) {
+            try {
+                // Lấy tên nhân viên
+                String employeeName = userRepository.findById(request.getAssignedEmployeeId())
+                        .map(UserEntity::getFullName).orElse("Không rõ");
+                String summary = "Ca làm việc: " + employeeName;
+                String description = "Ghi chú: " + request.getNotes();
+
+                googleCalendarService.createEvent(
+                        googleApiProperties.getClient().getId(),
+                        googleApiProperties.getClient().getSecret(),
+                        manager.getGoogleRefreshToken(),
+                        summary,
+                        description,
+                        request.getScheduledStartTime(),
+                        request.getScheduledEndTime()
+                );
+            } catch (IOException e) {
+                // Log lỗi, nhưng không làm crash cả tiến trình tạo ca
+                System.err.println("Lỗi khi tạo sự kiện Google Calendar: " + e.getMessage());
+            }
+        }
         return convertToDto(savedShift);
     }
 
