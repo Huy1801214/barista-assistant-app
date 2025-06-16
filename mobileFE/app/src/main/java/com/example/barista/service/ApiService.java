@@ -106,4 +106,13 @@ public interface ApiService extends ProductApi, VouchersApi, UserApi {
             @Header("Authorization") String authToken,
             @Query("categoryId") String categoryId
     );
+
+    @POST("/api/employees")
+    Call<User> createEmployee(@Body User user);
+
+    @PUT("/api/employees/{id}")
+    Call<User> updateEmployee(@Path("id") String id, @Body User user);
+
+    @DELETE("/api/employees/{id}")
+    Call<Void> deleteEmployee(@Path("id") String id);
 }
