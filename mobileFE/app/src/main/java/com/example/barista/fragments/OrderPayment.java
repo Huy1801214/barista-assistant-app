@@ -31,7 +31,10 @@ import com.example.barista.utils.NumberFormat;
 import com.example.barista.utils.SessionManager;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -140,7 +143,25 @@ public class OrderPayment extends Fragment {
                         if (voucher != null && !voucher.isEmpty()) {
                             Cart cart = (Cart) Sharedable.get(Cart.ID);
                             double totalPrice = cart.getPrice();
-                            discountAmount = totalPrice * (voucher.get(0).getValue() / 100);
+                            Voucher.VoucherType type = voucher.get(0).getType();
+
+                            Date expiryDate = null;
+                            try {
+                                expiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(voucher.get(0).getEndDate());
+                                if (expiryDate.before(new Date())) {
+                                    voucherView.setTextColor(Color.RED);
+                                    return;
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                return;
+                            }
+
+                            if (type == Voucher.VoucherType.FIXED_AMOUNT) {
+                                discountAmount = voucher.get(0).getValue();
+                            } else if (type == Voucher.VoucherType.PERCENTAGE) {
+                                discountAmount = totalPrice * (voucher.get(0).getValue() / 100);
+                            }
 
                             updateTotalPrice();
                             voucherView.setTextColor(Color.BLACK);
