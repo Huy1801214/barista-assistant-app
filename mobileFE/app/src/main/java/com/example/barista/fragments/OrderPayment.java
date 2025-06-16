@@ -140,7 +140,13 @@ public class OrderPayment extends Fragment {
                         if (voucher != null && !voucher.isEmpty()) {
                             Cart cart = (Cart) Sharedable.get(Cart.ID);
                             double totalPrice = cart.getPrice();
-                            discountAmount = totalPrice * (voucher.get(0).getValue() / 100);
+                            Voucher.VoucherType type = voucher.get(0).getType();
+
+                            if (type == Voucher.VoucherType.FIXED_AMOUNT) {
+                                discountAmount = voucher.get(0).getValue();
+                            } else if (type == Voucher.VoucherType.PERCENTAGE) {
+                                discountAmount = totalPrice * (voucher.get(0).getValue() / 100);
+                            }
 
                             updateTotalPrice();
                             voucherView.setTextColor(Color.BLACK);

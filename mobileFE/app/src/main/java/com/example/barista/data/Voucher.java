@@ -27,11 +27,22 @@ public class Voucher {
     @SerializedName("value")
     private double value;
 
+    public enum VoucherType {
+        PERCENTAGE,
+        FIXED_AMOUNT
+    }
+    @SerializedName("type")
+    private VoucherType type;
+
     // Getters
     public String getId() { return id; }
     public String getName() { return name; }
     public String getCode() { return code; }
     public String getStatus() { return status; }
+
+    public VoucherType getType() {return type}
+
+
 
 
     // === CÁC PHƯƠNG THỨC TIỆN ÍCH ĐỂ HIỂN THỊ TRONG ADAPTER ===
