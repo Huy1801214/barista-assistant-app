@@ -39,6 +39,8 @@
         <activity android:name=".activity.StatisticalActivity" />
         <activity android:name=".activity.AddEditCategoryActivity" />
         <activity android:name=".activity.MenuSetupActivity" />
+        <activity android:name=".activity.ProductListSetupActivity" />
+        <activity android:name=".activity.AddEditProductActivity" />
         <activity
             android:name=".activity.AddEditStaffActivity"
             android:exported="false"
