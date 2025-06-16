@@ -52,6 +52,8 @@ public class SecurityConfig {
                                 "/statistical"
                         )
                         .permitAll()
+                        .requestMatchers("/api/history/work-shifts/export").permitAll()
+                        .requestMatchers("/api/google/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
