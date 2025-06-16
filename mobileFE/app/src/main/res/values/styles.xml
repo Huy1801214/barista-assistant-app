@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen  name="text_size_small">14sp</dimen>
-    <dimen  name="text_size_normal">16sp</dimen>
-    <dimen  name="text_size_h1">36sp</dimen>
-    <dimen  name="text_size_h2">24sp</dimen>
-    <dimen  name="text_size_h3">18sp</dimen>
-    <dimen  name="padding_1">10dp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_h1">36sp</dimen>
+    <dimen name="text_size_h2">24sp</dimen>
+    <dimen name="text_size_h3">18sp</dimen>
+    <dimen  name="padding_0_25">2dp</dimen>
+    <dimen  name="padding_0_5">5dp</dimen>
+    <dimen name="padding_1">10dp</dimen>
+
+    <style name="SettingsMenuItemContainer" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="SettingsMenuIcon" parent="">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
+    <style name="SettingsMenuText" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_dark_gray</item>
+    </style>
 </resources>

@@ -107,6 +107,36 @@ public interface ApiService extends ProductApi, VouchersApi, UserApi {
             @Query("categoryId") String categoryId
     );
 
+    @GET("/api/categories")
+    Call<List<Category>> getAllCategories(@Header("Authorization") String authToken);
+
+    @POST("/api/categories")
+    Call<Category> createCategory(@Header("Authorization") String authToken, @Body Category category);
+
+    @PUT("/api/categories/{id}")
+    Call<Category> updateCategory(@Header("Authorization") String authToken, @Path("id") String categoryId, @Body Category category);
+
+    @DELETE("/api/categories/{id}")
+    Call<Void> deleteCategory(@Header("Authorization") String authToken, @Path("id") String categoryId);
+
+    @GET("/api/products")
+    Call<List<ProductItem>> getProductsByCategory(@Header("Authorization") String authToken, @Query("categoryId") String categoryId);
+
+    @GET("/api/products/{id}")
+    Call<ProductItem> getProductById(@Header("Authorization") String authToken, @Path("id") String productId);
+
+    @POST("/api/products")
+    Call<ProductItem> createProduct(@Header("Authorization") String authToken, @Body ProductItem product);
+
+    @PUT("/api/products/{id}")
+    Call<ProductItem> updateProduct(@Header("Authorization") String authToken, @Path("id") String productId, @Body ProductItem product);
+
+    @DELETE("/api/products/{id}")
+    Call<Void> deleteProduct(@Header("Authorization") String authToken, @Path("id") String productId);
+
+    @GET("/api/google/auth/url")
+    Call<String> getGoogleAuthUrl(@Header("Authorization") String authToken);
+  
     @POST("/api/employees")
     Call<User> createEmployee(@Body User user);
 

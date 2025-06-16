@@ -12,8 +12,9 @@ public class UserEntity {
     // @Id: Đánh dấu trường này là khóa chính (_id trong MongoDB)
     @Id
     private String id;
-
-        @Field("full_name")
+    @Field("google_refresh_token")
+    private String googleRefreshToken;
+    @Field("full_name")
     private String fullName;
 
     // @Indexed(unique = true): Tạo một chỉ mục cho trường email và đảm bảo giá trị là duy nhất
@@ -111,4 +112,6 @@ public class UserEntity {
     public void setActive(boolean active) {
         isActive = active;
     }
+    public String getGoogleRefreshToken() { return googleRefreshToken; }
+    public void setGoogleRefreshToken(String googleRefreshToken) { this.googleRefreshToken = googleRefreshToken; }
 }
