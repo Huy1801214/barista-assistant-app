@@ -106,6 +106,7 @@ public interface ApiService extends ProductApi, VouchersApi, UserApi {
             @Header("Authorization") String authToken,
             @Query("categoryId") String categoryId
     );
+
     @GET("/api/categories")
     Call<List<Category>> getAllCategories(@Header("Authorization") String authToken);
 
@@ -135,4 +136,13 @@ public interface ApiService extends ProductApi, VouchersApi, UserApi {
 
     @GET("/api/google/auth/url")
     Call<String> getGoogleAuthUrl(@Header("Authorization") String authToken);
+  
+    @POST("/api/employees")
+    Call<User> createEmployee(@Body User user);
+
+    @PUT("/api/employees/{id}")
+    Call<User> updateEmployee(@Path("id") String id, @Body User user);
+
+    @DELETE("/api/employees/{id}")
+    Call<Void> deleteEmployee(@Path("id") String id);
 }
