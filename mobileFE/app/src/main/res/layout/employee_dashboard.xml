@@ -4,79 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray_background"
+    android:fitsSystemWindows="true"
     tools:context=".activity.EmployeeDashboardActivity">
 
-    <!-- 1. Bọc thanh tiêu đề trong AppBarLayout để CoordinatorLayout có thể quản lý -->
+    <!-- Thanh tiêu đề (Header) -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange_primary">
+        android:background="@color/orange_primary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <LinearLayout
-            android:id="@+id/headerLayout"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/avatarImage"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_avatar"
-                android:background="@drawable/ic_placeholder_24dp"
-                android:contentDescription="Avatar nhân viên"
-                android:padding="4dp" />
+            android:minHeight="?attr/actionBarSize"
+            app:contentInsetStart="0dp">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/headerLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="12dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/employeeName"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/avatarImage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="Avatar"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp"
+                    tools:src="@drawable/ic_avatar" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/employeeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Nguyễn Văn A" />
+
+                    <TextView
+                        android:id="@+id/employeePosition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.9"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="Nhân viên bán hàng" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/notificationIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nguyễn Văn A"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/employeePosition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nhân viên bán hàng"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Thông báo"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="@color/white" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/flagImage"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_placeholder_24dp"
-                android:contentDescription="Cờ"
-                android:layout_marginEnd="12dp" />
-
-            <ImageView
-                android:id="@+id/notificationIcon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_notifications"
-                android:contentDescription="Thông báo"
-                app:tint="@color/white" />
-        </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- 2. Nội dung chính, đặt dưới AppBarLayout bằng layout_behavior -->
-
-    <!-- Bottom Navigation -->
+    <!-- Nội dung chính có thể cuộn -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -85,45 +93,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="8dp">
 
-            <!-- Grid chức năng -->
+            <!-- Lưới chức năng -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:alignmentMode="alignMargins"
                 android:columnCount="2"
-                android:padding="8dp"
-                android:rowCount="1">
+                android:columnOrderPreserved="false">
 
                 <include
                     layout="@layout/item_function_taiquay"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:layout_margin="12dp" />
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_margin="8dp" />
 
                 <include
                     layout="@layout/item_function_baocao"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:layout_margin="12dp" />
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_margin="8dp" />
 
             </GridLayout>
 
-            <!-- CardView Liên hệ hỗ trợ -->
-            <!-- 3. Sửa các thuộc tính của CardView -->
-            <androidx.cardview.widget.CardView
+            <!-- CardView Hỗ trợ -->
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardViewHelp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -135,18 +141,18 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="Biểu tượng trợ giúp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:contentDescription="Hỗ trợ"
                         android:src="@drawable/help_button"
                         app:tint="@color/blue_accent" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Bạn cần hỗ trợ? Liên hệ chúng tôi để được giải đáp."
+                        android:text="Bạn cần hỗ trợ? Liên hệ chúng tôi."
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -154,23 +160,26 @@
                         android:id="@+id/buttonContact"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/blue_accent"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
                         android:text="Liên hệ"
-                        android:textColor="@color/white"
                         app:icon="@drawable/ic_chat_bubble" />
+
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Khoảng trống ở cuối để không bị BottomNavigationView che mất -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Thanh điều hướng dưới cùng -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/white"
         app:menu="@menu/employee_bottom_nav_menu" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

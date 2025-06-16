@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.barista.R;
-import com.example.barista.adpater.MenuCategoryAdapter;
-import com.example.barista.data.Category;
+import com.example.barista.adpater.ProductSetupAdapter;
+import com.example.barista.data.ProductItem;
 
 import com.example.barista.service.ApiClient;
 import com.example.barista.service.ApiService;
@@ -30,41 +30,55 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MenuSetupActivity extends AppCompatActivity implements MenuCategoryAdapter.OnCategorySetupListener {
+public class ProductListSetupActivity extends AppCompatActivity implements ProductSetupAdapter.OnProductSetupListener {
 
     private MaterialToolbar toolbar;
     private RecyclerView recyclerView;
-    private FloatingActionButton fabAddCategory;
+    private FloatingActionButton fabAddProduct;
     private ProgressBar progressBar;
-    private MenuCategoryAdapter adapter;
-    private List<Category> categoryList = new ArrayList<>();
+    private ProductSetupAdapter adapter;
+    private List<ProductItem> productList = new ArrayList<>();
     private ApiService apiService;
     private SessionManager sessionManager;
+    private String categoryId;
+    private String categoryName;
 
-    private final ActivityResultLauncher<Intent> addEditCategoryLauncher = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> addEditProductLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK) {
-                    loadCategoriesFromServer();
+                    loadProductsFromServer();
                 }
             });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_setup);
+        setContentView(R.layout.activity_product_list_setup);
+
+        Intent intent = getIntent();
+        categoryId = intent.getStringExtra("CATEGORY_ID");
+        categoryName = intent.getStringExtra("CATEGORY_NAME");
+
+        if (categoryId == null || categoryName == null) {
+            Toast.makeText(this, "Lỗi: Không có thông tin danh mục.", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
         initViews();
         initLogic();
         setupToolbar();
         setupRecyclerView();
         setupListeners();
-        loadCategoriesFromServer();
+
+        loadProductsFromServer();
     }
 
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
-        recyclerView = findViewById(R.id.recyclerViewMenuCategories);
-        fabAddCategory = findViewById(R.id.fabAddCategory);
+        recyclerView = findViewById(R.id.recyclerViewProducts);
+        fabAddProduct = findViewById(R.id.fabAddProduct);
         progressBar = findViewById(R.id.progressBar);
     }
 
@@ -74,95 +88,90 @@ public class MenuSetupActivity extends AppCompatActivity implements MenuCategory
     }
 
     private void setupToolbar() {
+        toolbar.setTitle("Sản phẩm trong: " + categoryName);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void setupRecyclerView() {
-        adapter = new MenuCategoryAdapter(categoryList, this);
+        adapter = new ProductSetupAdapter(this, productList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
     private void setupListeners() {
-        fabAddCategory.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddEditCategoryActivity.class);
-            addEditCategoryLauncher.launch(intent);
+        fabAddProduct.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AddEditProductActivity.class);
+            intent.putExtra("CATEGORY_ID", categoryId);
+            intent.putExtra("CATEGORY_NAME", categoryName);
+            addEditProductLauncher.launch(intent);
         });
     }
 
-    private void loadCategoriesFromServer() {
+    private void loadProductsFromServer() {
         setLoading(true);
         String token = "Bearer " + sessionManager.fetchAuthToken();
-        apiService.getAllCategories(token).enqueue(new Callback<List<Category>>() {
+        apiService.getProductsByCategory(token, categoryId).enqueue(new Callback<List<ProductItem>>() {
             @Override
-            public void onResponse(@NonNull Call<List<Category>> call, @NonNull Response<List<Category>> response) {
+            public void onResponse(@NonNull Call<List<ProductItem>> call, @NonNull Response<List<ProductItem>> response) {
                 setLoading(false);
                 if (response.isSuccessful() && response.body() != null) {
-                    categoryList.clear();
-                    categoryList.addAll(response.body());
+                    productList.clear();
+                    productList.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(MenuSetupActivity.this, "Tải danh mục thất bại.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductListSetupActivity.this, "Tải sản phẩm thất bại.", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
-            public void onFailure(@NonNull Call<List<Category>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<ProductItem>> call, @NonNull Throwable t) {
                 setLoading(false);
-                Toast.makeText(MenuSetupActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductListSetupActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void deleteCategory(Category category, int position) {
+    private void deleteProduct(ProductItem product, int position) {
         setLoading(true);
         String token = "Bearer " + sessionManager.fetchAuthToken();
-        apiService.deleteCategory(token, category.getId()).enqueue(new Callback<Void>() {
+        apiService.deleteProduct(token, product.getId()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 setLoading(false);
                 if (response.isSuccessful()) {
-                    categoryList.remove(position);
+                    productList.remove(position);
                     adapter.notifyItemRemoved(position);
-                    Toast.makeText(MenuSetupActivity.this, "Đã xóa: " + category.getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductListSetupActivity.this, "Đã xóa: " + product.getName(), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MenuSetupActivity.this, "Xóa thất bại.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductListSetupActivity.this, "Xóa thất bại.", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 setLoading(false);
-                Toast.makeText(MenuSetupActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductListSetupActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public void onCategoryClick(Category category) {
-        // Màn hình quản lý sản phẩm chưa được tạo, tạm thời comment
-         Intent intent = new Intent(this, ProductListSetupActivity.class);
-         intent.putExtra("CATEGORY_ID", category.getId());
-         intent.putExtra("CATEGORY_NAME", category.getName());
-         startActivity(intent);
-        Toast.makeText(this, "Mở sản phẩm của: " + category.getName(), Toast.LENGTH_SHORT).show();
+    public void onEditClick(ProductItem product) {
+        Intent intent = new Intent(this, AddEditProductActivity.class);
+        intent.putExtra("PRODUCT_ID", product.getId());
+        intent.putExtra("CATEGORY_ID", product.getCategoryId());
+        intent.putExtra("CATEGORY_NAME", categoryName);
+        addEditProductLauncher.launch(intent);
     }
 
     @Override
-    public void onEditClick(Category category) {
-        Intent intent = new Intent(this, AddEditCategoryActivity.class);
-        intent.putExtra("CATEGORY_ID", category.getId());
-        intent.putExtra("CATEGORY_NAME", category.getName());
-        addEditCategoryLauncher.launch(intent);
-    }
-
-    @Override
-    public void onDeleteClick(Category category, int position) {
+    public void onDeleteClick(ProductItem product, int position) {
         new AlertDialog.Builder(this)
                 .setTitle("Xác nhận xóa")
-                .setMessage("Bạn có chắc chắn muốn xóa danh mục '" + category.getName() + "' không?")
-                .setPositiveButton("Xóa", (dialog, which) -> deleteCategory(category, position))
+                .setMessage("Bạn có chắc chắn muốn xóa sản phẩm '" + product.getName() + "'?")
+                .setPositiveButton("Xóa", (dialog, which) -> deleteProduct(product, position))
                 .setNegativeButton("Hủy", null)
                 .show();
     }
