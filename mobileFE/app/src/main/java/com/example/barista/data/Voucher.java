@@ -27,6 +27,10 @@ public class Voucher {
     @SerializedName("value")
     private double value;
 
+    public String getEndDate() {
+        return endDate;
+    }
+
     public enum VoucherType {
         PERCENTAGE,
         FIXED_AMOUNT
