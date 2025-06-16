@@ -112,10 +112,32 @@ public class StatisticalActivity extends AppCompatActivity {
                 if (statisticalResponse != null) {
                     TextView orderCount = findViewById(R.id.orderCountText);
                     TextView revenue = findViewById(R.id.revenueText);
-                    TextView discount = findViewById(R.id.discountText);
+                    TextView totalText = findViewById(R.id.totalText);
                     orderCount.setText(String.valueOf(statisticalResponse.getOrderCount()));
                     revenue.setText(NumberFormat.formatMoney(statisticalResponse.getRevenue()));
-                    discount.setText(NumberFormat.formatMoney(statisticalResponse.getDiscount()));
+                    totalText.setText(NumberFormat.formatMoney(statisticalResponse.getTotal()));
+
+                    TextView customerCount = findViewById(R.id.customerCount);
+                    customerCount.setText(String.valueOf(statisticalResponse.getOrderCount()));
+
+
+                    TextView totalOrderText = findViewById(R.id.totalOrderText);
+                    totalOrderText.setText(String.valueOf(statisticalResponse.getOrderCount()));
+
+                    TextView orderPrice = findViewById(R.id.orderPrice);
+                    orderPrice.setText(NumberFormat.formatMoney(statisticalResponse.getTotal()));
+
+                    TextView totalDiscountCountText = findViewById(R.id.totalDiscountCountText);
+                    totalDiscountCountText.setText(String.valueOf(statisticalResponse.getDiscountCount()));
+
+                    TextView totalDiscountText = findViewById(R.id.totalDiscountText);
+                    totalDiscountText.setText(NumberFormat.formatMoney(statisticalResponse.getDiscount()));
+
+                    TextView totalOrderCompleted = findViewById(R.id.totalOrderCompleted);
+                    totalOrderCompleted.setText(NumberFormat.formatMoney(statisticalResponse.getRevenue()));
+
+                    TextView totalOrderCompletedCountText = findViewById(R.id.totalOrderCompletedCountText);
+                    totalOrderCompletedCountText.setText(String.valueOf(statisticalResponse.getOrderCount()));
 
                     RecyclerView history = findViewById(R.id.orderHistory);
                     history.setAdapter(new OrderHistoryAdapter(statisticalResponse));

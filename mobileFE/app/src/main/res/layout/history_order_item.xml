@@ -1,129 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_1">
+    android:padding="@dimen/padding_0_25"
+    app:strokeWidth="3dp"
+    app:strokeColor="@color/light_gray_background">
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
+        android:padding="@dimen/padding_0_5">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mã đơn hàng:"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3">
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã đơn hàng:"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3">
 
-        </TextView>
+            </TextView>
+            <Space
+                android:layout_width="@dimen/padding_1"
+                android:layout_height="@dimen/padding_1">
+
+            </Space>
+            <TextView
+                android:id="@+id/orderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã đơn hàng"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3">
+
+            </TextView>
+        </LinearLayout>
         <Space
-            android:layout_width="@dimen/padding_1"
-            android:layout_height="@dimen/padding_1">
+            android:layout_width="10dp"
+            android:layout_height="10dp">
 
         </Space>
-        <TextView
-            android:id="@+id/orderId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mã đơn hàng"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3">
-
-        </TextView>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="10dp">
-
-    </Space>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Giá"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3"
-            android:layout_weight="1">
-
-        </TextView>
-        <TextView
-            android:id="@+id/totalPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Giá"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3"
-            android:layout_weight="1">
-
-        </TextView>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="10dp">
-
-    </Space>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Giảm giá"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3"
-            android:layout_weight="1">
-
-        </TextView>
-        <TextView
-            android:id="@+id/discount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Giá"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3"
-            android:layout_weight="1">
-
-        </TextView>
-    </LinearLayout>
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="10dp">
-
-    </Space>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sản phẩm"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3"
-            android:layout_weight="1">
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Giá"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_weight="1">
 
-        </TextView>
-        <TextView
-            android:id="@+id/product"
+            </TextView>
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Giá"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_weight="1">
+
+            </TextView>
+        </LinearLayout>
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="10dp">
+
+        </Space>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sản phẩm"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_h3"
-            android:layout_weight="1">
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Giảm giá"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_weight="1">
 
-        </TextView>
+            </TextView>
+            <TextView
+                android:id="@+id/discount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Giá"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_weight="1">
+
+            </TextView>
+        </LinearLayout>
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="10dp">
+
+        </Space>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sản phẩm"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_weight="1">
+
+            </TextView>
+            <TextView
+                android:id="@+id/product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sản phẩm"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_h3"
+                android:layout_weight="1">
+
+            </TextView>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
